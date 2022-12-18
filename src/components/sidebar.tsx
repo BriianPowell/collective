@@ -15,14 +15,17 @@ import {
   mdiCalendarAccount,
 } from '@mdi/js'
 
-import profile from '../assets/images/profile.jpg'
+import avatar from '../assets/images/avatar1.png'
 import sidebarStyles from '../assets/css/sidebar.module.scss'
 import sharedStyles from '../assets/css/shared.module.scss'
 
 export const Sidebar: FC<IPersonalData> = props => {
   const mailLink: string = `mailto:${props.about.email}`
   const phoneLink: string = `tel:${props.about.phone}`
-  const birthday: string = `${props.about.birthday?.getMonth}-${props.about.birthday?.getDay}`
+  const birthday: string = props.about.birthday!.toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+  })
 
   const sidebarRef = useRef<HTMLElement>(null)
 
@@ -30,7 +33,7 @@ export const Sidebar: FC<IPersonalData> = props => {
     <aside className={sidebarStyles.sidebar} ref={sidebarRef}>
       <div className={sidebarStyles.sidebar_info}>
         <figure className={sidebarStyles.avatar_box}>
-          <Image src={profile} alt={props.about.name} width="80" />
+          <Image src={avatar} alt={props.about.name} />
         </figure>
         <div className={sidebarStyles.info_content}>
           <h1 className={sidebarStyles.name} title={props.about.name}>
@@ -43,13 +46,12 @@ export const Sidebar: FC<IPersonalData> = props => {
           onClick={() => elementToggle(sidebarRef)}
         >
           <span>Show Contacts</span>
-
           <Icon size={1} path={mdiChevronDown} />
         </button>
       </div>
 
       <div className={sidebarStyles.sidebar_info_more}>
-        <div className={sharedStyles.separator}></div>
+        <div className={sidebarStyles.separator}></div>
 
         <ul className={sidebarStyles.contacts_list}>
           <li className={sidebarStyles.contact_item}>
@@ -80,11 +82,9 @@ export const Sidebar: FC<IPersonalData> = props => {
             <div className={sharedStyles.icon_box}>
               <Icon size={1} path={mdiCalendarAccount} />
             </div>
-            <div className="contact-info">
-              <p className="contact-title">Birthday</p>
-              <time dateTime={birthday}>
-                {new Date(birthday).toLocaleDateString()}
-              </time>
+            <div className={sidebarStyles.contact_info}>
+              <p className={sidebarStyles.contact_title}>Birthday</p>
+              <p>{birthday}</p>
             </div>
           </li>
 
@@ -99,7 +99,7 @@ export const Sidebar: FC<IPersonalData> = props => {
           </li>
         </ul>
 
-        <div className={sharedStyles.separator}></div>
+        <div className={sidebarStyles.separator}></div>
 
         <ul className={sidebarStyles.social_list}>
           <li className={sidebarStyles.social_item}>

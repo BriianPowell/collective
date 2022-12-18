@@ -5,7 +5,7 @@ export const data: IPersonalData = {
     name: 'Brian Powell',
     label: 'Full Stack Software Engineer',
     description: "Welcome to Brian's Personal Portfolio",
-    birthday: new Date(1995, 11, 2),
+    birthday: new Date(1995, 10, 2),
     summary: '',
     image_url: '',
     email: 'brian@powell.place',
