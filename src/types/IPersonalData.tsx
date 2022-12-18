@@ -1,4 +1,4 @@
-export interface PersonalData {
+export interface IPersonalData {
   about: {
     /** Your full name as it should appear on your resume */
     name: string
@@ -7,6 +7,8 @@ export interface PersonalData {
      * @example "Full Stack Software Engineer"
      */
     label?: string
+    description?: string
+    birthday?: Date
     /** A longer description of yourself */
     summary?: string
     /** URL to image of yourself or a personal logo */
@@ -21,14 +23,28 @@ export interface PersonalData {
     website?: {
       /**
        * Actual URL
-       * @example "https://orleans.io"
+       * @example "https://powell.place"
        */
       url: string
       /**
        * Pretty version of URL
-       * @example "orleans.io"
+       * @example "powell.place"
        */
       pretty: string
     }
+    profiles?: {
+      /** Name of the social network */
+      network: string
+      /**
+       * Your username on the network
+       * @example "BriianPowell"
+       */
+      username: string
+      /**
+       * A link to your profile on the network
+       * @example "https://github.com/BriianPowell"
+       */
+      url: string
+    }[]
   }
 }

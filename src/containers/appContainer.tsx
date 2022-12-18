@@ -1,9 +1,17 @@
-import { FC, RefObject, useMemo, useRef } from 'react'
+import { Component } from 'react'
 
-import { ResumeData } from '../data'
-import { useMediaQuery, useScrollPos } from '../hooks'
-import styles from './header.module.scss'
+import { Sidebar } from 'components/Sidebar'
 
-export const AppContainer: FC => {
+import { IPersonalData } from 'types/IPersonalData'
 
+class AppContainer extends Component<IPersonalData> {
+  render() {
+    return (
+      <main>
+        <Sidebar {...this.props} />
+      </main>
+    )
+  }
 }
+
+export default AppContainer
