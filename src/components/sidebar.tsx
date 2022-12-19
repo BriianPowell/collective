@@ -19,6 +19,8 @@ import avatar from '../assets/images/avatar1.png'
 import sidebarStyles from '../assets/css/sidebar.module.scss'
 import sharedStyles from '../assets/css/shared.module.scss'
 
+import ImageLoader from 'utils/ImageLoader'
+
 export const Sidebar: FC<IPersonalData> = props => {
   const mailLink: string = `mailto:${props.about.email}`
   const phoneLink: string = `tel:${props.about.phone}`
@@ -33,7 +35,7 @@ export const Sidebar: FC<IPersonalData> = props => {
     <aside className={sidebarStyles.sidebar} ref={sidebarRef}>
       <div className={sidebarStyles.sidebar_info}>
         <figure className={sidebarStyles.avatar_box}>
-          <Image src={avatar} alt={props.about.name} />
+          <ImageLoader src={avatar.src} alt={props.about.name} />
         </figure>
         <div className={sidebarStyles.info_content}>
           <h1 className={sidebarStyles.name} title={props.about.name}>

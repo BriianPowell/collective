@@ -13,12 +13,12 @@ const cloudflareLoader = (args: ImageLoaderProps) => {
   return `/cdn-cgi/image/${paramsString}/${normalizeSrc(args.src)}`
 }
 
-const ImageLoader = (src: string, alt: string) => {
+const ImageLoader = (args: { src: string; alt: string }) => {
   return (
     <Image
       loader={cloudflareLoader}
-      src={src}
-      alt={alt}
+      src={args.src}
+      alt={args.alt}
       width={500}
       height={500}
     />
