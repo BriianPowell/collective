@@ -1,4 +1,4 @@
-# [Collective](https://powell.place) ![release](https://img.shields.io/endpoint?url=https://cloudflare-pages-badges.boog.workers.dev/?projectName=collective)
+# [Collective](https://powell.place) [![release](https://img.shields.io/endpoint?url=https://cloudflare-pages-badges.boog.workers.dev/?projectName=collective)](https://dash.cloudflare.com/79ed6309f43a7d4e15773c743936ae11/pages/view/collective)
 
 ## About
 
