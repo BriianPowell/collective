@@ -1,9 +1,11 @@
-# [Collective](https://powell.place)
+# [Collective](https://powell.place) (![release](https://img.shields.io/endpoint?url=https://cloudflare-pages-badges.boog.workers.dev/?projectName=collective))[]
+
+## About
 
 This project takes influences from [@DudeofAwesome](https://github.com/dudeofawesome/resume) for overall NextJS project structure and implementation. CSS was inspired from [vcard-personal-portfolio](https://github.com/codewithsadee/vcard-personal-portfolio) and modified to be used in SCSS modules, as well as inclued easier portability to ReactJS.
 
 <details>
-  <summary>NextJS</summary>
+  <summary>NextJS README</summary>
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 

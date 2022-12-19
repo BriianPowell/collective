@@ -120,10 +120,11 @@ function mapSocialItems(socialLinks: IPersonalData['about']['profiles']) {
   if (socialLinks != null) {
     return socialLinks.map(item => {
       return (
-        <li className={sidebarStyles.social_item}>
+        <li key={item.network} className={sidebarStyles.social_item}>
           <a
             href={item.url}
             target="_blank"
+            rel="noreferrer"
             className={sidebarStyles.social_link}
           >
             <Icon path={socialIconMap[item.network]} />
