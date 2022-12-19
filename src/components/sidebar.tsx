@@ -121,7 +121,11 @@ function mapSocialItems(socialLinks: IPersonalData['about']['profiles']) {
     return socialLinks.map(item => {
       return (
         <li className={sidebarStyles.social_item}>
-          <a href={item.url} className={sidebarStyles.social_link}>
+          <a
+            href={item.url}
+            target="_blank"
+            className={sidebarStyles.social_link}
+          >
             <Icon path={socialIconMap[item.network]} />
           </a>
         </li>
