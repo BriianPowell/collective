@@ -14,9 +14,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "cloudflare:build": "node node_modules/@cloudflare/next-on-pages/bin/index.js --experimental-minify",
-    "postinstall": "patch-package"
+    "lint": "next lint"
   },
   "dependencies": {
     "@mdi/js": "^7.1.96",
