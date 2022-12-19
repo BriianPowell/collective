@@ -3,7 +3,7 @@ import { IPersonalData } from 'types/IPersonalData'
 export const data: IPersonalData = {
   about: {
     name: 'Brian Powell',
-    label: 'Full Stack Software Engineer',
+    label: 'Software Engineer',
     description: "Welcome to Brian's Personal Portfolio",
     birthday: new Date(1995, 10, 2),
     summary: '',
@@ -17,9 +17,24 @@ export const data: IPersonalData = {
     },
     profiles: [
       {
-        network: 'github',
+        network: 'Github',
         username: 'BriianPowell',
         url: 'https://github.com/BriianPowell',
+      },
+      {
+        network: 'LinkedIn',
+        username: 'BriianPowell',
+        url: 'https://www.linkedin.com/in/briianpowell/',
+      },
+      {
+        network: 'Twitter',
+        username: 'briianpowell',
+        url: 'https://twitter.com/briianpowell',
+      },
+      {
+        network: 'Instagram',
+        username: 'briianpowell',
+        url: 'https://www.instagram.com/briianpowell/',
       },
     ],
   },

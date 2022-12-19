@@ -102,33 +102,34 @@ export const Sidebar: FC<IPersonalData> = props => {
         <div className={sidebarStyles.separator}></div>
 
         <ul className={sidebarStyles.social_list}>
-          <li className={sidebarStyles.social_item}>
-            <a href="#" className={sidebarStyles.social_link}>
-              <Icon path={mdiGithub} />
-            </a>
-          </li>
-
-          <li className={sidebarStyles.social_item}>
-            <a href="#" className={sidebarStyles.social_link}>
-              <Icon path={mdiLinkedin} />
-            </a>
-          </li>
-
-          <li className={sidebarStyles.social_item}>
-            <a href="#" className={sidebarStyles.social_link}>
-              <Icon path={mdiTwitter} />
-            </a>
-          </li>
-
-          <li className={sidebarStyles.social_item}>
-            <a href="#" className={sidebarStyles.social_link}>
-              <Icon path={mdiInstagram} />
-            </a>
-          </li>
+          {mapSocialItems(props.about.profiles)}
         </ul>
       </div>
     </aside>
   )
+}
+
+function mapSocialItems(socialLinks: IPersonalData['about']['profiles']) {
+  const socialIconMap: { [id: string]: string } = {
+    Github: mdiGithub,
+    LinkedIn: mdiLinkedin,
+    Twitter: mdiTwitter,
+    Instagram: mdiInstagram,
+  }
+
+  if (socialLinks != null) {
+    return socialLinks.map(item => {
+      return (
+        <li className={sidebarStyles.social_item}>
+          <a href={item.url} className={sidebarStyles.social_link}>
+            <Icon path={socialIconMap[item.network]} />
+          </a>
+        </li>
+      )
+    })
+  } else {
+    console.error('MISSING data.about.profiles')
+  }
 }
 
 function elementToggle(elem: React.RefObject<HTMLElement>) {
