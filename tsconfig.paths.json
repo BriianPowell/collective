@@ -6,6 +6,8 @@
       "containers/*": ["./containers/*"],
       "components/*": ["./components/*"],
       "utils/*": ["./utils/*"],
+      "images/*": ["./assets/images/*"],
+      "css/*": ["./assets/css/*"],
       "data": ["./data"]
     }
   }

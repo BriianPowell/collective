@@ -25,4 +25,4 @@ const ImageLoader = (args: { src: string; alt: string }) => {
   )
 }
 
-export default ImageLoader
+export default cloudflareLoader

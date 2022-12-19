@@ -7,7 +7,6 @@ const nextConfig = {
   swcMinify: true,
   images: {
     loader: 'custom',
-    loaderFile: './src/utils/ImageLoader.tsx',
   },
 }
 

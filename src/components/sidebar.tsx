@@ -1,5 +1,6 @@
 import { FC, useRef } from 'react'
 import Image from 'next/image'
+import cloudflareLoader from 'utils/ImageLoader'
 import Icon from '@mdi/react'
 
 import { IPersonalData } from 'types/IPersonalData'
@@ -15,11 +16,9 @@ import {
   mdiCalendarAccount,
 } from '@mdi/js'
 
-import avatar from '../assets/images/avatar1.png'
-import sidebarStyles from '../assets/css/sidebar.module.scss'
-import sharedStyles from '../assets/css/shared.module.scss'
-
-import ImageLoader from 'utils/ImageLoader'
+import avatar from 'images/avatar1.png'
+import sidebarStyles from 'css/sidebar.module.scss'
+import sharedStyles from 'css/shared.module.scss'
 
 export const Sidebar: FC<IPersonalData> = props => {
   const mailLink: string = `mailto:${props.about.email}`
@@ -35,7 +34,11 @@ export const Sidebar: FC<IPersonalData> = props => {
     <aside className={sidebarStyles.sidebar} ref={sidebarRef}>
       <div className={sidebarStyles.sidebar_info}>
         <figure className={sidebarStyles.avatar_box}>
-          <ImageLoader src={avatar.src} alt={props.about.name} />
+          <Image
+            loader={cloudflareLoader}
+            src={avatar}
+            alt={props.about.name}
+          />
         </figure>
         <div className={sidebarStyles.info_content}>
           <h1 className={sidebarStyles.name} title={props.about.name}>
