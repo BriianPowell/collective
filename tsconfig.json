@@ -13,15 +13,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true,
-    "baseUrl": "./src",
-    "paths": {
-      "types/*": ["./types/*"],
-      "containers/*": ["./containers/*"],
-      "components/*": ["./components/*"],
-      "data": ["./data"]
-    }
+    "incremental": true
   },
+  "extends": "./tsconfig.paths.json",
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

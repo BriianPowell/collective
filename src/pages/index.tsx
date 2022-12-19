@@ -2,7 +2,7 @@ import Head from 'next/head'
 import styles from '../assets/css/home.module.scss'
 
 import { data } from 'data'
-import AppContainer from '../containers/AppContainer'
+import AppContainer from 'containers/AppContainer'
 
 export default function Home() {
   const title = data.about.name
