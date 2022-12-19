@@ -1,4 +1,4 @@
-# [Collective](https://powell.place) (![release](https://img.shields.io/endpoint?url=https://cloudflare-pages-badges.boog.workers.dev/?projectName=collective))[]
+# [Collective](https://powell.place) ![release](https://img.shields.io/endpoint?url=https://cloudflare-pages-badges.boog.workers.dev/?projectName=collective)
 
 ## About
 
