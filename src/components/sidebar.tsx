@@ -32,7 +32,7 @@ export const Sidebar: FC<IPersonalData> = props => {
     <aside className={sidebarStyles.sidebar} ref={sidebarRef}>
       <div className={sidebarStyles.sidebar_info}>
         <figure className={sidebarStyles.avatar_box}>
-          <img src={avatar.src} alt={props.about.name} />
+          <img src={avatar.src} alt={props.about.name} width={80} />
         </figure>
         <div className={sidebarStyles.info_content}>
           <h1 className={sidebarStyles.name} title={props.about.name}>
@@ -45,7 +45,7 @@ export const Sidebar: FC<IPersonalData> = props => {
           onClick={() => elementToggle(sidebarRef)}
         >
           <span>Show Contacts</span>
-          <Icon size={1} path={mdiChevronDown} />
+          <Icon path={mdiChevronDown} />
         </button>
       </div>
 

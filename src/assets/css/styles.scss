@@ -180,6 +180,7 @@ body {
   #REUSED STYLE
 \*-----------------------------------*/
 
+aside,
 article {
   background: var(--eerie-black-2);
   border: 1px solid var(--jet);
@@ -191,11 +192,11 @@ article {
 
 article {
   display: none;
-}
 
-article.active {
-  display: block;
-  animation: fade 0.5s ease backwards;
+  &.active {
+    display: block;
+    animation: fade 0.5s ease backwards;
+  }
 }
 
 @keyframes fade {
@@ -220,6 +221,13 @@ main {
 /*-----------------------------------*\
   #RESPONSIVE
 \*-----------------------------------*/
+
+/*
+** LARGER THAN 450 SCREEN
+*/
+
+@media (min-width: 450px) {
+}
 
 /*
 ** LARGER THAN 580 SCREEN
