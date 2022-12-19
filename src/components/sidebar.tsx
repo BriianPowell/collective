@@ -6,12 +6,13 @@ import { IPersonalData } from 'types/IPersonalData'
 import {
   mdiChevronDown,
   mdiEmailOutline,
-  mdiPhoneOutline,
+  mdiCellphone,
   mdiInstagram,
   mdiTwitter,
-  mdiFacebook,
+  mdiLinkedin,
   mdiMapMarkerOutline,
-  mdiCalendarAccount,
+  mdiCalendarTodayOutline,
+  mdiGithub,
 } from '@mdi/js'
 
 import avatar from 'images/avatar1.png'
@@ -55,7 +56,7 @@ export const Sidebar: FC<IPersonalData> = props => {
         <ul className={sidebarStyles.contacts_list}>
           <li className={sidebarStyles.contact_item}>
             <div className={sharedStyles.icon_box}>
-              <Icon size={1} path={mdiEmailOutline} />
+              <Icon path={mdiEmailOutline} />
             </div>
             <div className={sidebarStyles.contact_info}>
               <p className={sidebarStyles.contact_title}>Email</p>
@@ -67,7 +68,7 @@ export const Sidebar: FC<IPersonalData> = props => {
 
           <li className={sidebarStyles.contact_item}>
             <div className={sharedStyles.icon_box}>
-              <Icon size={1} path={mdiPhoneOutline} />
+              <Icon path={mdiCellphone} />
             </div>
             <div className={sidebarStyles.contact_info}>
               <p className={sidebarStyles.contact_title}>Phone</p>
@@ -79,17 +80,17 @@ export const Sidebar: FC<IPersonalData> = props => {
 
           <li className={sidebarStyles.contact_item}>
             <div className={sharedStyles.icon_box}>
-              <Icon size={1} path={mdiCalendarAccount} />
+              <Icon path={mdiCalendarTodayOutline} />
             </div>
             <div className={sidebarStyles.contact_info}>
               <p className={sidebarStyles.contact_title}>Birthday</p>
-              <p>{birthday}</p>
+              <span>{birthday}</span>
             </div>
           </li>
 
           <li className={sidebarStyles.contact_item}>
             <div className={sharedStyles.icon_box}>
-              <Icon size={1} path={mdiMapMarkerOutline} />
+              <Icon path={mdiMapMarkerOutline} />
             </div>
             <div className={sidebarStyles.contact_info}>
               <p className={sidebarStyles.contact_title}>Location</p>
@@ -103,19 +104,25 @@ export const Sidebar: FC<IPersonalData> = props => {
         <ul className={sidebarStyles.social_list}>
           <li className={sidebarStyles.social_item}>
             <a href="#" className={sidebarStyles.social_link}>
-              <Icon size={1} path={mdiFacebook} />
+              <Icon path={mdiGithub} />
             </a>
           </li>
 
           <li className={sidebarStyles.social_item}>
             <a href="#" className={sidebarStyles.social_link}>
-              <Icon size={1} path={mdiTwitter} />
+              <Icon path={mdiLinkedin} />
             </a>
           </li>
 
           <li className={sidebarStyles.social_item}>
             <a href="#" className={sidebarStyles.social_link}>
-              <Icon size={1} path={mdiInstagram} />
+              <Icon path={mdiTwitter} />
+            </a>
+          </li>
+
+          <li className={sidebarStyles.social_item}>
+            <a href="#" className={sidebarStyles.social_link}>
+              <Icon path={mdiInstagram} />
             </a>
           </li>
         </ul>
