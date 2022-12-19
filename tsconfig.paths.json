@@ -5,6 +5,7 @@
       "types/*": ["./types/*"],
       "containers/*": ["./containers/*"],
       "components/*": ["./components/*"],
+      "utils/*": ["./utils/*"],
       "data": ["./data"]
     }
   }
