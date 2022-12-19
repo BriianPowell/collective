@@ -1,4 +1,4 @@
-# Collective
+# [Collective](https://powell.place)
 
 This project takes influences from [@DudeofAwesome](https://github.com/dudeofawesome/resume) for overall NextJS project structure and implementation. CSS was inspired from [vcard-personal-portfolio](https://github.com/codewithsadee/vcard-personal-portfolio) and modified to be used in SCSS modules, as well as inclued easier portability to ReactJS.
 
