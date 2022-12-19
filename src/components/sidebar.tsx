@@ -1,6 +1,4 @@
 import { FC, useRef } from 'react'
-import Image from 'next/image'
-import cloudflareLoader from 'utils/ImageLoader'
 import Icon from '@mdi/react'
 
 import { IPersonalData } from 'types/IPersonalData'
@@ -34,11 +32,7 @@ export const Sidebar: FC<IPersonalData> = props => {
     <aside className={sidebarStyles.sidebar} ref={sidebarRef}>
       <div className={sidebarStyles.sidebar_info}>
         <figure className={sidebarStyles.avatar_box}>
-          <Image
-            loader={cloudflareLoader}
-            src={avatar}
-            alt={props.about.name}
-          />
+          <img src={avatar.src} alt={props.about.name} />
         </figure>
         <div className={sidebarStyles.info_content}>
           <h1 className={sidebarStyles.name} title={props.about.name}>
