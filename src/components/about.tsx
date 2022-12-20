@@ -6,7 +6,7 @@ import sharedstyles from 'css/shared.module.scss'
 
 const About: FC<IPersonalData> = props => {
   return (
-    <article className={[aboutStyles.about, aboutStyles.active].join(' ')}>
+    <article className={[aboutStyles.about].join(' ')}>
       <header>
         <h2 className={[sharedstyles.h2, aboutStyles.article_title].join(' ')}>
           About me
