@@ -1,5 +1,5 @@
 export default interface IRoutePages {
   title: string
-  render: any
+  render: object
   isActive: boolean
 }

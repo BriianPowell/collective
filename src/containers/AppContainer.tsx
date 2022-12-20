@@ -31,7 +31,7 @@ const AppContainer: FC<IPersonalData> = props => {
       <Sidebar {...props} />
       <div className={sharedStyles.main_content}>
         {renderNavbar(activePage, SetActivePage)}
-        {renderActivePage(activePage)}
+        <>{renderActivePage(activePage)}</>
       </div>
     </main>
   )
