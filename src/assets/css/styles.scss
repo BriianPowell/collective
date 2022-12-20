@@ -168,10 +168,6 @@ textarea {
   outline-color: var(--orange-yellow-crayola);
 }
 
-div {
-  font-family: var(--ff-poppins);
-}
-
 body {
   background: var(--smoky-black);
 }
@@ -192,20 +188,6 @@ article {
 
 article {
   display: none;
-
-  &.active {
-    display: block;
-    animation: fade 0.5s ease backwards;
-  }
-}
-
-@keyframes fade {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }
 
 /*-----------------------------------*\
@@ -213,6 +195,7 @@ article {
 \*-----------------------------------*/
 
 main {
+  font-family: var(--ff-poppins);
   margin: 15px 12px;
   margin-bottom: 75px;
   min-width: 259px;
@@ -292,7 +275,7 @@ main {
 }
 
 /*
-** LARGER THAN 1050PX SCREEN
+** LARGER THAN 1250PX SCREEN
 */
 
 @media (min-width: 1250px) {
