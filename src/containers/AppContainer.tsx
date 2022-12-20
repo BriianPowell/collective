@@ -18,20 +18,20 @@ const poppins = Poppins({
 })
 
 const AppContainer: FC<IPersonalData> = props => {
-  const [activePage, SetActivePage] = useState('About')
-
   const pages: IRoutePages[] = [
-    { title: 'About', render: <About {...props} /> },
-    { title: 'Resume', render: <Resume {...props} /> },
-    { title: 'Contact', render: <Contact {...props} /> },
+    { title: 'About', render: <About {...props} />, isActive: true },
+    { title: 'Resume', render: <Resume {...props} />, isActive: false },
+    { title: 'Contact', render: <Contact {...props} />, isActive: false },
   ]
+
+  const [activePage, SetActivePage] = useState(pages)
 
   return (
     <main className={poppins.variable}>
       <Sidebar {...props} />
       <div className={sharedStyles.main_content}>
-        {renderNavbar(pages, SetActivePage)}
-        {renderActivePage(pages, activePage)}
+        {renderNavbar(activePage, SetActivePage)}
+        {renderActivePage(activePage)}
       </div>
     </main>
   )
@@ -39,7 +39,7 @@ const AppContainer: FC<IPersonalData> = props => {
 
 function renderNavbar(
   pages: IRoutePages[],
-  setActivePage: Dispatch<SetStateAction<string>>,
+  setActivePage: Dispatch<SetStateAction<IRoutePages[]>>,
 ) {
   return (
     <nav className={navbarStyles.navbar}>
@@ -48,9 +48,19 @@ function renderNavbar(
           return (
             <li className={navbarStyles.navbar_item} key={i}>
               <button
-                className={navbarStyles.navbar_link}
+                className={
+                  l.isActive
+                    ? [navbarStyles.navbar_link, navbarStyles.active].join(' ')
+                    : navbarStyles.navbar_link
+                }
                 onClick={() => {
-                  setActivePage(l.title)
+                  setActivePage(prevState => {
+                    return prevState.map(item => {
+                      return item.title === l.title
+                        ? { ...item, isActive: !item.isActive }
+                        : { ...item, isActive: false }
+                    })
+                  })
                 }}
               >
                 {l.title}
@@ -63,9 +73,16 @@ function renderNavbar(
   )
 }
 
-function renderActivePage(pages: IRoutePages[], activePage: string) {
-  return pages.map((l, i) => {
-    if (l.title === activePage) return l.render
+function renderActivePage(pages: IRoutePages[]) {
+  const renderPageRes = pages.find(item => {
+    return item.isActive === true
   })
+
+  if (renderPageRes != null) {
+    return renderPageRes.render
+  } else {
+    console.error('NO PAGE TO RENDER')
+  }
 }
+
 export default AppContainer
