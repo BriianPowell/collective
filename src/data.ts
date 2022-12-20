@@ -1,4 +1,4 @@
-import { IPersonalData } from 'types/IPersonalData'
+import IPersonalData from 'types/IPersonalData'
 
 export const data: IPersonalData = {
   about: {

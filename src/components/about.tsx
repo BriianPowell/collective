@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { IPersonalData } from 'types/IPersonalData'
+import IPersonalData from 'types/IPersonalData'
 
 import aboutStyles from 'css/about.module.scss'
 import sharedstyles from 'css/shared.module.scss'

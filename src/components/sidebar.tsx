@@ -1,7 +1,7 @@
 import { FC, useRef } from 'react'
 import Icon from '@mdi/react'
 
-import { IPersonalData } from 'types/IPersonalData'
+import IPersonalData from 'types/IPersonalData'
 
 import {
   mdiChevronDown,
