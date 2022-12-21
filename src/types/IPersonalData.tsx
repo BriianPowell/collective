@@ -20,7 +20,10 @@ export default interface IPersonalData {
      * This could be your address, or just a city, etc
      */
     location?: string
-    about?: string
+    bio?: {
+      p1: string
+      p2: string
+    }
     website?: {
       /**
        * Actual URL

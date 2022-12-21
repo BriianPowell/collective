@@ -1,3 +1,7 @@
+/*-----------------------------------*\
+  #SHARED
+\*-----------------------------------*/
+
 .separator {
   margin: 32px 0;
 }
@@ -58,6 +62,7 @@
 .article_title {
   position: relative;
   padding-bottom: 7px;
+  margin-bottom: 30px;
 
   &::after {
     content: '';
@@ -156,6 +161,16 @@
       width: 40px;
       height: 5px;
     }
+  }
+}
+
+/*
+** LARGER THAN 768PX SCREEN
+*/
+
+@media (min-width: 768px) {
+  .article_title {
+    padding-bottom: 20px;
   }
 }
 

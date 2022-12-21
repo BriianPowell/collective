@@ -15,7 +15,10 @@ export const data: IPersonalData = {
       url: 'https://powell.place',
       pretty: 'powell.place',
     },
-    about: 'I am a Software Engineer',
+    bio: {
+      p1: 'I am a Software Engineer and an Unrelenting Tinkerer with a passion for solving difficult problems efficiently. My interests tend to lead me towards backend but I have a hard time saying no to a challenge.',
+      p2: 'I like to describe myself as a hard working individual who loves to be apart of a team that fosters growth. My strengths come from my experiences, my previous roles, internships, and university, which have given me a strong foundation from which to move forward.',
+    },
     profiles: [
       {
         network: 'Github',
