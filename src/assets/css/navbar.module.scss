@@ -12,7 +12,11 @@
   border: 1px solid var(--jet);
   border-radius: 12px 12px 0 0;
   box-shadow: var(--shadow-2);
-  z-index: 5;
+  z-index: 1;
+
+  .active {
+    color: var(--orange-yellow-crayola);
+  }
 }
 
 .navbar_list {
@@ -29,14 +33,14 @@
   padding: 20px 7px;
   transition: color var(--transition-1);
 
-  &:hover,
-  &:focus {
-    color: var(--light-gray-70);
-  }
+  // &:hover,
+  // &:focus {
+  //color: var(--light-gray-70);
+  // }
 }
 
-.active {
-  color: var(--orange-yellow-crayola);
+.hover {
+  color: var(--light-gray-70);
 }
 
 /*-----------------------------------*\

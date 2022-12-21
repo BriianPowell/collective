@@ -15,6 +15,7 @@ export const data: IPersonalData = {
       url: 'https://powell.place',
       pretty: 'powell.place',
     },
+    about: 'I am a Software Engineer',
     profiles: [
       {
         network: 'Github',

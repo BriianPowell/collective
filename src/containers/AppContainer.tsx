@@ -41,18 +41,30 @@ function renderNavbar(
   pages: IRoutePages[],
   setActivePage: Dispatch<SetStateAction<IRoutePages[]>>,
 ) {
+  const mouseEvent = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const btn: HTMLButtonElement = event.currentTarget
+    btn.classList.toggle(navbarStyles.hover)
+  }
+
   return (
     <nav className={navbarStyles.navbar}>
       <ul className={navbarStyles.navbar_list}>
         {pages.map((l, i) => {
           return (
-            <li className={navbarStyles.navbar_item} key={i}>
+            <li
+              className={[navbarStyles.navbar_item, navbarStyles.hover].join(
+                ' ',
+              )}
+              key={i}
+            >
               <button
                 className={
                   l.isActive
                     ? [navbarStyles.navbar_link, navbarStyles.active].join(' ')
                     : navbarStyles.navbar_link
                 }
+                onMouseOver={mouseEvent}
+                onMouseOut={mouseEvent}
                 onClick={() => {
                   setActivePage(prevState => {
                     return prevState.map(item => {
