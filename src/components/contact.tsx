@@ -2,7 +2,7 @@ import { FC, useMemo, useState, useRef } from 'react'
 import { GoogleMap, useLoadScript } from '@react-google-maps/api'
 import Icon from '@mdi/react'
 import ReCAPTCHA from 'react-google-recaptcha'
-import { Formik, Form, Field } from 'Formik'
+import { Formik, Form, Field } from 'formik'
 import * as yup from 'yup'
 
 import IPersonalData from 'types/IPersonalData'
