@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import styles from '../assets/css/home.module.scss'
 
 import { data } from 'data'
 import AppContainer from 'containers/AppContainer'
@@ -15,7 +14,6 @@ export default function Home() {
           <meta name="description" content={data.about.description} />
         )}
 
-        <meta name="format-detection" content="telephone=no" />
         <link
           rel="apple-touch-icon"
           sizes="180x180"
@@ -38,6 +36,7 @@ export default function Home() {
           name="viewport"
           content="width=device-width, initial-scale=1.0"
         ></meta>
+        <meta name="format-detection" content="telephone=no" />
         <meta property="og:site_name" content={title} />
         <meta property="og:title" content={title} />
         <meta property="og:type" content="profile" />

@@ -1,8 +1,12 @@
-import { FC, useMemo } from 'react'
+import { FC, useMemo, useState, useRef, useEffect } from 'react'
+import { GoogleMap, useLoadScript } from '@react-google-maps/api'
 import Icon from '@mdi/react'
-import { GoogleMap, useLoadScript, MarkerF } from '@react-google-maps/api'
+import ReCAPTCHA from 'react-google-recaptcha'
+import { Formik, Form, Field } from 'Formik'
+import * as yup from 'yup'
 
 import IPersonalData from 'types/IPersonalData'
+import IFormikContext from 'types/IFormikContext'
 
 import { mdiSendOutline } from '@mdi/js'
 
@@ -16,6 +20,7 @@ const Contact: FC<IPersonalData> = props => {
   })
 
   const mapCenter = useMemo(() => ({ lat: 33.660057, lng: -117.99897 }), [])
+  const [submitted, setSubmitted] = useState(false)
 
   return (
     <article className={contactStyles.contact}>
@@ -28,7 +33,7 @@ const Contact: FC<IPersonalData> = props => {
       <section className={contactStyles.mapbox}>
         <figure>
           {!isLoaded ? (
-            <div>Loading...</div>
+            <div className={contactStyles.loading}>Loading...</div>
           ) : (
             <GoogleMap
               zoom={10}
@@ -37,12 +42,6 @@ const Contact: FC<IPersonalData> = props => {
               clickableIcons={false}
             ></GoogleMap>
           )}
-          {/* <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d199666.5651251294!2d-121.58334177520186!3d38.56165006739519!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x809ac672b28397f9%3A0x921f6aaa74197fdb!2sSacramento%2C%20CA%2C%20USA!5e0!3m2!1sen!2sbd!4v1647608789441!5m2!1sen!2sbd"
-            width="400"
-            height="300"
-            loading="lazy"
-          ></iframe> */}
         </figure>
       </section>
 
@@ -50,44 +49,167 @@ const Contact: FC<IPersonalData> = props => {
         <h3 className={[sharedStyles.h3, contactStyles.form_title].join(' ')}>
           Contact Form
         </h3>
-
-        <form action="#" className="form" data-form>
-          <div className={contactStyles.input_wrapper}>
-            <input
-              type="text"
-              name="fullname"
-              className={contactStyles.form_input}
-              placeholder="Full Name"
-              required
-              data-form-input
-            />
-
-            <input
-              type="email"
-              name="email"
-              className={contactStyles.form_input}
-              placeholder="Email Address"
-              required
-              data-form-input
-            />
-          </div>
-
-          <textarea
-            name="message"
-            className={contactStyles.textarea_form_input}
-            placeholder="Message"
-            required
-            data-form-input
-          ></textarea>
-
-          <button className={contactStyles.form_btn} type="submit">
-            <Icon path={mdiSendOutline} />
-            <span>Send Message</span>
-          </button>
-        </form>
+        <Formik
+          initialValues={{
+            access_key: process.env.NEXT_PUBLIC_FORMS_KEY,
+            subject: 'New Submission from Portfolio Website',
+            fullname: '',
+            email: '',
+            message: '',
+          }}
+          onSubmit={(values: IFormikContext, { setSubmitting, resetForm }) => {
+            try {
+              postFormData(values)
+              setSubmitted(true)
+            } catch (err) {
+              console.log('Error on Web3Forms Call', err)
+              resetForm()
+              setSubmitted(false)
+            }
+            setSubmitting(false)
+          }}
+          validationSchema={yup.object({
+            fullname: yup.string().required('Name is required'),
+            email: yup
+              .string()
+              .email('Please enter a valid email address')
+              .required('Email is required'),
+            message: yup.string().required('Please enter a message for me!'),
+          })}
+        >
+          {({
+            isSubmitting,
+            isValid,
+            dirty,
+            values,
+            handleChange,
+            submitForm,
+          }) => (
+            <>
+              {ReturnForm(
+                submitted,
+                isSubmitting,
+                isValid,
+                dirty,
+                values,
+                handleChange,
+                submitForm,
+              )}
+            </>
+          )}
+        </Formik>
       </section>
     </article>
   )
+}
+
+function ReturnForm(
+  submitted: boolean,
+  isSubmitting: boolean,
+  isValid: boolean,
+  dirty: boolean,
+  values: IFormikContext,
+  handleChange: any,
+  submitForm: any,
+) {
+  let recaptchaRef = useRef<ReCAPTCHA>(null)
+
+  const onReCAPTCHAChange = (captchaCode: string | null) => {
+    if (!captchaCode) {
+      return
+    }
+    recaptchaRef.current!.reset()
+    submitForm()
+  }
+
+  return (
+    <Form
+      className="form"
+      onSubmit={e => {
+        e.preventDefault()
+        recaptchaRef.current?.execute()
+      }}
+    >
+      <div className={contactStyles.input_wrapper}>
+        <Field
+          type="checkbox"
+          name="botcheck"
+          id=""
+          className={contactStyles.bot_check}
+        />
+
+        <Field
+          type="text"
+          id="fullname"
+          name="fullname"
+          className={contactStyles.form_input}
+          placeholder="Full Name"
+          values={values.fullname}
+          onChange={handleChange}
+          required
+        />
+
+        <Field
+          type="email"
+          id="email"
+          name="email"
+          className={contactStyles.form_input}
+          placeholder="Email Address"
+          values={values.email}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      <Field
+        component="textarea"
+        id="message"
+        name="message"
+        className={contactStyles.textarea_form_input}
+        placeholder="Message"
+        values={values.message}
+        onChange={handleChange}
+        required
+      ></Field>
+
+      <ReCAPTCHA
+        ref={recaptchaRef}
+        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+        size="invisible"
+        onChange={onReCAPTCHAChange}
+      />
+      <button
+        className={contactStyles.form_btn}
+        type="submit"
+        disabled={!dirty || !isValid || isSubmitting || submitted}
+      >
+        <Icon path={mdiSendOutline} />
+        {submitted ? (
+          <span>Submitted!</span>
+        ) : isSubmitting ? (
+          <span>Submitting...</span>
+        ) : (
+          <span>Send Message</span>
+        )}
+      </button>
+    </Form>
+  )
+}
+
+function postFormData(values: IFormikContext) {
+  console.log('Values to Post', JSON.stringify(values, null, 2))
+  fetch('https://api.web3forms.com/submit', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify(values),
+  }).then(async response => {
+    response.status === 200
+      ? console.log(response.status)
+      : console.log(response)
+  })
 }
 
 export default Contact
