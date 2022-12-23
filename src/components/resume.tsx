@@ -1,9 +1,7 @@
 import { FC } from 'react'
 
-import IPersonalData from 'types/IPersonalData'
+import { IPersonalData } from 'types/index'
 
-const Resume: FC<IPersonalData> = props => {
+export const Resume: FC<IPersonalData> = props => {
   return <div>RESUME RENDERED</div>
 }
-
-export default Resume

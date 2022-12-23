@@ -4,6 +4,16 @@
 
 This project takes influences from [@DudeofAwesome](https://github.com/dudeofawesome/resume) for overall NextJS project structure and implementation. CSS was inspired from [vcard-personal-portfolio](https://github.com/codewithsadee/vcard-personal-portfolio) and modified to be used in SCSS modules, as well as inclued easier portability to ReactJS.
 
+### Enviroment Variables
+
+| Key                            | Value                                                        |
+| ------------------------------ | ------------------------------------------------------------ |
+| NEXT_PUBLIC_FORMS_KEY          | Key for Web3Forms access to allow contact page functionality |
+| NEXT_PUBLIC_RECAPTCHA_SITE_KEY | Key for Google ReCAPTCHA access                              |
+| NEXT_PUBLIC_MAPS_API_KEY       | Key for Google Maps access                                   |
+
+
+
 <details>
   <summary>NextJS README</summary>
 

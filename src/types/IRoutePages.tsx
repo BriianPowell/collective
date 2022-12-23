@@ -1,4 +1,4 @@
-export default interface IRoutePages {
+export interface IRoutePages {
   title: string
   render: object
   isActive: boolean

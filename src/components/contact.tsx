@@ -1,25 +1,25 @@
 import { FC, useMemo, useState, useRef } from 'react'
 import { GoogleMap, useLoadScript } from '@react-google-maps/api'
-import Icon from '@mdi/react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { Formik, Form, Field } from 'formik'
 import * as yup from 'yup'
 
-import IPersonalData from 'types/IPersonalData'
-import IFormikContext from 'types/IFormikContext'
+import { IPersonalData, IFormikContext } from 'types/index'
 
+import Icon from '@mdi/react'
 import { mdiSendOutline } from '@mdi/js'
 
 import contactStyles from 'css/contact.module.scss'
 import sharedStyles from 'css/shared.module.scss'
 
-const Contact: FC<IPersonalData> = props => {
+export const Contact: FC<IPersonalData> = props => {
   const { isLoaded } = useLoadScript({
     id: 'collective-map-script',
     googleMapsApiKey: process.env.NEXT_PUBLIC_MAPS_API_KEY!,
   })
 
   const mapCenter = useMemo(() => ({ lat: 33.660057, lng: -117.99897 }), [])
+
   const [submitted, setSubmitted] = useState(false)
 
   return (
@@ -51,8 +51,9 @@ const Contact: FC<IPersonalData> = props => {
         </h3>
         <Formik
           initialValues={{
-            access_key: process.env.NEXT_PUBLIC_FORMS_KEY,
-            subject: 'New Submission from Portfolio Website',
+            submitted: submitted,
+            access_key: '',
+            subject: '',
             fullname: '',
             email: '',
             message: '',
@@ -211,5 +212,3 @@ function postFormData(values: IFormikContext) {
       : console.log(response)
   })
 }
-
-export default Contact

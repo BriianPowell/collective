@@ -1,10 +1,10 @@
 import { FC } from 'react'
-import IPersonalData from 'types/IPersonalData'
+import { IPersonalData } from 'types/index'
 
 import aboutStyles from 'css/about.module.scss'
 import sharedstyles from 'css/shared.module.scss'
 
-const About: FC<IPersonalData> = props => {
+export const About: FC<IPersonalData> = props => {
   return (
     <article className={[aboutStyles.about].join(' ')}>
       <header>
@@ -63,5 +63,3 @@ function renderServices(
     )
   })
 }
-
-export default About

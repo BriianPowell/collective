@@ -196,7 +196,6 @@
 }
 
 .loading {
-  width: 100%;
   background: var(--border-gradient-onyx);
   display: flex;
   justify-content: center;
@@ -204,7 +203,8 @@
   font-size: var(--fs-2);
   color: var(--white-2);
   transition: var(--transition-1);
-  padding-top: 7rem;
+  margin: 0 auto;
+  height: 100%;
 }
 
 /*-----------------------------------*\

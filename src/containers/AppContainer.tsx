@@ -1,16 +1,11 @@
 import { Dispatch, FC, SetStateAction, useState } from 'react'
 import { Poppins } from '@next/font/google'
 
-import Sidebar from 'components/sidebar'
-import About from 'components/about'
-import Resume from 'components/resume'
-import Contact from 'components/contact'
+import { IPersonalData, IRoutePages } from 'types/index'
+import { Sidebar, About, Resume, Contact } from 'components/index'
 
 import sharedStyles from 'css/shared.module.scss'
 import navbarStyles from 'css/navbar.module.scss'
-
-import IPersonalData from 'types/IPersonalData'
-import IRoutePages from 'types/IRoutePages'
 
 const poppins = Poppins({
   weight: ['300', '400', '500', '600'],

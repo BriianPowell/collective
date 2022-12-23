@@ -1,4 +1,4 @@
-export default interface IPersonalData {
+export interface IPersonalData {
   about: {
     /** Your full name as it should appear on your resume */
     name: string

@@ -1,8 +1,8 @@
 import { FC, useRef } from 'react'
+
+import { IPersonalData } from 'types/index'
+
 import Icon from '@mdi/react'
-
-import IPersonalData from 'types/IPersonalData'
-
 import {
   mdiChevronDown,
   mdiEmailOutline,
@@ -19,7 +19,7 @@ import avatar from 'images/avatar1.png'
 import sidebarStyles from 'css/sidebar.module.scss'
 import sharedStyles from 'css/shared.module.scss'
 
-const Sidebar: FC<IPersonalData> = props => {
+export const Sidebar: FC<IPersonalData> = props => {
   const mailLink: string = `mailto:${props.about.email}`
   const phoneLink: string = `tel:${props.about.phone}`
   const birthday: string = props.about.birthday!.toLocaleDateString('en-US', {
@@ -143,5 +143,3 @@ function elementToggle(elem: React.RefObject<HTMLElement>) {
     aside.classList.toggle(sidebarStyles.active)
   }
 }
-
-export default Sidebar

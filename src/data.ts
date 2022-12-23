@@ -1,4 +1,4 @@
-import IPersonalData from 'types/IPersonalData'
+import { IPersonalData } from 'types/index'
 
 import cloudIcon from 'images/icon-cloud1.png'
 import frontIcon from 'images/icon-dev1.svg'
@@ -55,11 +55,18 @@ export const data: IPersonalData = {
         text: 'Implementing Terraform, Terragrunt, and AWS CDK to enable high Cloud utilization',
       },
       {
+        iconSrc: cicdIcon.src,
+        iconSize: 85,
+        iconAlt: 'Continuous Integration, Continuous Deployment',
+        title: 'CI/CD',
+        text: 'Embracing the latest CI/CD patterns and technologies to minimize technological debt',
+      },
+      {
         iconSrc: frontIcon.src,
         iconSize: 70,
         iconAlt: 'Front End',
         title: 'Front End',
-        text: 'Designing and deploying SPA frameworks ontop of serverless architecture',
+        text: 'Designing and deploying SPA frameworks ontop of serverless architectures',
       },
       {
         iconSrc: backIcon.src,
@@ -67,13 +74,6 @@ export const data: IPersonalData = {
         iconAlt: 'Back End',
         title: 'Back End',
         text: 'Architecting and constructing highly efficient systems with minimal infrastructural overhead',
-      },
-      {
-        iconSrc: cicdIcon.src,
-        iconSize: 85,
-        iconAlt: 'Continuous Integration, Continuous Deployment',
-        title: 'CI/CD',
-        text: 'Embracing the latest CI/CD patterns and technologies to minimize technological debt',
       },
     ],
   },
