@@ -18,7 +18,7 @@ const InitialAppContext: IAppContext = {
 
 const AppContext = createContext<IAppContext>(InitialAppContext)
 
-const AppContextProvider = ({
+export const AppContextProvider = ({
   children,
 }: IContextProviderProps): JSX.Element => {
   const [contextState, setContext] = useState<IAppContext>(InitialAppContext)
@@ -30,4 +30,8 @@ const AppContextProvider = ({
   )
 }
 
-export default AppContextProvider
+/* Resources:
+ ** https://reactjs.org/docs/context.html
+ ** https://www.bundleapps.io/blog/nextjs-context-api-tutorial
+ ** https://contactmentor.com/react-context-with-hooks/
+ */

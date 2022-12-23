@@ -3,6 +3,7 @@ import { Poppins } from '@next/font/google'
 
 import { IPersonalData, IRoutePages } from 'types/index'
 import { Sidebar, About, Resume, Contact } from 'components/index'
+import { AppContextProvider } from 'utils/AppContextProvider'
 
 import sharedStyles from 'css/shared.module.scss'
 import navbarStyles from 'css/navbar.module.scss'
@@ -22,13 +23,15 @@ const AppContainer: FC<IPersonalData> = props => {
   const [activePage, SetActivePage] = useState(pages)
 
   return (
-    <main className={poppins.variable}>
-      <Sidebar {...props} />
-      <div className={sharedStyles.main_content}>
-        {renderNavbar(activePage, SetActivePage)}
-        <>{renderActivePage(activePage)}</>
-      </div>
-    </main>
+    <AppContextProvider>
+      <main className={poppins.variable}>
+        <Sidebar {...props} />
+        <div className={sharedStyles.main_content}>
+          {renderNavbar(activePage, SetActivePage)}
+          <>{renderActivePage(activePage)}</>
+        </div>
+      </main>
+    </AppContextProvider>
   )
 }
 
