@@ -50,5 +50,12 @@ export default interface IPersonalData {
        */
       url: string
     }[]
+    services?: {
+      iconSrc?: string
+      iconSize?: number
+      iconAlt?: string
+      title?: string
+      text?: string
+    }[]
   }
 }
