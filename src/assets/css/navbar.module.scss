@@ -29,7 +29,7 @@
 
 .navbar_link {
   color: var(--light-gray);
-  font-size: var(--fs-8);
+  font-size: var(--fs-6);
   padding: 20px 7px;
   transition: color var(--transition-1);
 
@@ -50,7 +50,6 @@
 /*
 ** LARGER THAN 580PX SCREEN
 */
-
 @media (min-width: 580px) {
   .navbar {
     border-radius: 20px 20px 0 0;
@@ -61,7 +60,7 @@
   }
 
   .navbar_link {
-    --fs-8: 14px;
+    --fs-6: 15px;
   }
 }
 
@@ -71,7 +70,7 @@
 
 @media (min-width: 768px) {
   .navbar_link {
-    --fs-8: 15px;
+    --fs-6: 17px;
   }
 }
 
