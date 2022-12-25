@@ -76,5 +76,20 @@ export const data: IPersonalData = {
         text: 'Architecting and constructing highly efficient systems with minimal infrastructural overhead',
       },
     ],
+    education: [
+      {
+        organization: 'California State University, Long Beach',
+        duration: '2016 - 2018',
+        title: 'Bachelor of Science (BS), Computer Science',
+        text: "Activities and societies: Sigma Chi Fraternity Graduated from California State University, Long Beach with a Bachelor's Degree in Computer Science with a 3.0 GPA.",
+      },
+      {
+        organization: 'Santiago Canyon College',
+        duration: '2013 - 2016',
+        title: 'Associate of Science (AS) for Transfer, Physics, Mathematics',
+        text: 'Activities and societies: Indoor and outdoor intramural soccer (Stem)^2 Succeeded in finishing my term at this college and graduated with a 3.1 GPA',
+      },
+    ],
+    experience: [{ organization: '', duration: '', title: '', text: '' }],
   },
 }

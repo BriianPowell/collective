@@ -1,0 +1,114 @@
+.resume {
+  display: block;
+  animation: fade 0.5s ease backwards;
+}
+
+.timeline {
+  margin-bottom: 30px;
+
+  .title_wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: 1px;
+    margin-bottom: 35px;
+
+    svg {
+      width: 23px;
+    }
+  }
+}
+
+.timeline_list {
+  font-size: var(--fs-6);
+  margin-left: 45px;
+
+  span {
+    color: var(--vegas-gold);
+    font-weight: var(--fw-400);
+    line-height: 1.6;
+
+    b {
+      color: var(--light-gray);
+      font-weight: var(--fw-500);
+    }
+  }
+}
+
+.timeline_item {
+  position: relative;
+
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+
+  &:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    top: -25px;
+    left: -30px;
+    width: 1px;
+    height: calc(100% + 50px);
+    background: var(--jet);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: -33px;
+    height: 6px;
+    width: 6px;
+    background: var(--text-gradient-yellow);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px var(--jet);
+  }
+}
+
+.timeline_item_title {
+  font-size: var(--fs-5);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.timeline_text {
+  color: var(--light-gray-70);
+  font-weight: var(--fw-300);
+  line-height: 1.6;
+}
+
+/*
+** LARGER THAN 580PX SCREEN
+*/
+
+@media (min-width: 580px) {
+  .timeline_list {
+    margin-left: 65px;
+  }
+
+  .timeline_item {
+    &:not(:last-child)::before {
+      left: -40px;
+    }
+
+    &::after {
+      height: 8px;
+      width: 8px;
+      left: -43px;
+    }
+  }
+
+  .skills_item:not(:last-child) {
+    margin-bottom: 25px;
+  }
+}
+
+/*
+** LARGER THAN 1250PX SCREEN
+*/
+
+@media (min-width: 1250px) {
+  .timeline_text {
+    max-width: 700px;
+  }
+}

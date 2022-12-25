@@ -1,3 +1,5 @@
+import { string } from 'yup'
+
 export interface IPersonalData {
   about: {
     /** Your full name as it should appear on your resume */
@@ -54,6 +56,18 @@ export interface IPersonalData {
       iconSrc?: string
       iconSize?: number
       iconAlt?: string
+      title?: string
+      text?: string
+    }[]
+    education?: {
+      organization?: string
+      duration?: string
+      title?: string
+      text?: string
+    }[]
+    experience?: {
+      organization?: string
+      duration?: string
       title?: string
       text?: string
     }[]
