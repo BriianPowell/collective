@@ -1,10 +1,11 @@
-import { FC, useMemo, useState, useRef } from 'react'
+import { FC, useMemo, useRef, ChangeEvent, useState } from 'react'
 import { GoogleMap, useLoadScript } from '@react-google-maps/api'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { Formik, Form, Field } from 'formik'
 import * as yup from 'yup'
 
 import { IPersonalData, IFormikContext } from 'types/index'
+import { useAppContext } from 'utils/AppContextProvider'
 
 import Icon from '@mdi/react'
 import { mdiSendOutline } from '@mdi/js'
@@ -20,7 +21,22 @@ export const Contact: FC<IPersonalData> = props => {
 
   const mapCenter = useMemo(() => ({ lat: 33.660057, lng: -117.99897 }), [])
 
-  const [submitted, setSubmitted] = useState(false)
+  const { formContent, setContext } = useAppContext()
+  const [submitted, setSubmitted] = useState(formContent.submitted)
+
+  function setSubmitContext(values: IFormikContext) {
+    formContent.email = values.email
+    formContent.fullname = values.fullname
+    formContent.message = values.message
+    formContent.submitted = values.submitted
+    setSubmitted(formContent.submitted)
+    setContext(formContent)
+  }
+
+  function setFieldContext(field: string, value: string) {
+    formContent[field] = value
+    setContext(formContent)
+  }
 
   return (
     <article className={contactStyles.contact}>
@@ -50,22 +66,23 @@ export const Contact: FC<IPersonalData> = props => {
           Contact Form
         </h3>
         <Formik
+          enableReinitialize
           initialValues={{
             submitted: submitted,
-            access_key: '',
-            subject: '',
-            fullname: '',
-            email: '',
-            message: '',
+            access_key: formContent.access_key,
+            subject: formContent.subject,
+            fullname: formContent.fullname,
+            email: formContent.email,
+            message: formContent.message,
           }}
           onSubmit={(values: IFormikContext, { setSubmitting, resetForm }) => {
             try {
               postFormData(values)
-              setSubmitted(true)
+              setSubmitContext({ ...values, submitted: true })
             } catch (err) {
               console.log('Error on Web3Forms Call', err)
               resetForm()
-              setSubmitted(false)
+              setSubmitContext({ ...values, submitted: false })
             }
             setSubmitting(false)
           }}
@@ -83,17 +100,19 @@ export const Contact: FC<IPersonalData> = props => {
             isValid,
             dirty,
             values,
-            handleChange,
+            setFieldValue,
+            setSubmitting,
             submitForm,
           }) => (
             <>
               {ReturnForm(
-                submitted,
                 isSubmitting,
                 isValid,
                 dirty,
                 values,
-                handleChange,
+                setFieldContext,
+                setFieldValue,
+                setSubmitting,
                 submitForm,
               )}
             </>
@@ -105,12 +124,13 @@ export const Contact: FC<IPersonalData> = props => {
 }
 
 function ReturnForm(
-  submitted: boolean,
   isSubmitting: boolean,
   isValid: boolean,
   dirty: boolean,
   values: IFormikContext,
   handleChange: any,
+  setFieldValue: any,
+  setSubmitting: any,
   submitForm: any,
 ) {
   let recaptchaRef = useRef<ReCAPTCHA>(null)
@@ -120,12 +140,13 @@ function ReturnForm(
       return
     }
     recaptchaRef.current!.reset()
+    setSubmitting(true)
     submitForm()
   }
 
   return (
     <Form
-      className="form"
+      className={contactStyles.form}
       onSubmit={e => {
         e.preventDefault()
         recaptchaRef.current?.execute()
@@ -146,7 +167,10 @@ function ReturnForm(
           className={contactStyles.form_input}
           placeholder="Full Name"
           values={values.fullname}
-          onChange={handleChange}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            setFieldValue(e.currentTarget!.name, e.currentTarget!.value)
+            handleChange(e.currentTarget!.name, e.currentTarget!.value)
+          }}
           required
         />
 
@@ -157,7 +181,10 @@ function ReturnForm(
           className={contactStyles.form_input}
           placeholder="Email Address"
           values={values.email}
-          onChange={handleChange}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            setFieldValue(e.currentTarget!.name, e.currentTarget!.value)
+            handleChange(e.currentTarget!.name, e.currentTarget!.value)
+          }}
           required
         />
       </div>
@@ -169,7 +196,10 @@ function ReturnForm(
         className={contactStyles.textarea_form_input}
         placeholder="Message"
         values={values.message}
-        onChange={handleChange}
+        onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
+          setFieldValue(e.currentTarget!.name, e.currentTarget!.value)
+          handleChange(e.currentTarget!.name, e.currentTarget!.value)
+        }}
         required
       ></Field>
 
@@ -182,10 +212,10 @@ function ReturnForm(
       <button
         className={contactStyles.form_btn}
         type="submit"
-        disabled={!dirty || !isValid || isSubmitting || submitted}
+        disabled={!dirty || !isValid || isSubmitting || values.submitted}
       >
         <Icon path={mdiSendOutline} />
-        {submitted ? (
+        {values.submitted ? (
           <span>Submitted!</span>
         ) : isSubmitting ? (
           <span>Submitting...</span>
@@ -198,7 +228,6 @@ function ReturnForm(
 }
 
 function postFormData(values: IFormikContext) {
-  console.log('Values to Post', JSON.stringify(values, null, 2))
   fetch('https://api.web3forms.com/submit', {
     method: 'POST',
     headers: {
@@ -208,7 +237,7 @@ function postFormData(values: IFormikContext) {
     body: JSON.stringify(values),
   }).then(async response => {
     response.status === 200
-      ? console.log(response.status)
+      ? console.log(`${response.status} Contact Requested!`)
       : console.log(response)
   })
 }

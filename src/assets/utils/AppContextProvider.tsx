@@ -1,6 +1,6 @@
-import { createContext, useState } from 'react'
+import { createContext, useContext, useState } from 'react'
 
-import { IAppContext, IContextProviderProps } from 'types/index'
+import { IAppContext, IFormikContext, IContextProviderProps } from 'types/index'
 
 const InitialAppContext: IAppContext = {
   formContent: {
@@ -18,17 +18,25 @@ const InitialAppContext: IAppContext = {
 
 const AppContext = createContext<IAppContext>(InitialAppContext)
 
-export const AppContextProvider = ({
+const useAppContext = () => useContext(AppContext)
+
+const AppContextProvider = ({
   children,
 }: IContextProviderProps): JSX.Element => {
-  const [contextState, setContext] = useState<IAppContext>(InitialAppContext)
+  const [formContext, setFormContent] = useState<IFormikContext>(
+    InitialAppContext.formContent,
+  )
 
   return (
-    <AppContext.Provider value={{ ...contextState, setContext }}>
+    <AppContext.Provider
+      value={{ formContent: formContext, setContext: setFormContent }}
+    >
       {children}
     </AppContext.Provider>
   )
 }
+
+export { useAppContext, AppContextProvider }
 
 /* Resources:
  ** https://reactjs.org/docs/context.html
