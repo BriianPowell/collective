@@ -36,6 +36,11 @@
     hsl(45, 100%, 71%) 0%,
     hsla(36, 100%, 69%, 0) 50%
   );
+  --bg-gradient-yellow-3: linear-gradient(
+    to top left,
+    hsl(45, 100%, 71%) 0%,
+    hsla(45, 100%, 71%, 0.251) 0%
+  );
   --bg-gradient-yellow-2: linear-gradient(
       135deg,
       hsla(45, 100%, 71%, 0.251) 0%,

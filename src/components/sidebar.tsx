@@ -1,4 +1,4 @@
-import { FC, useRef } from 'react'
+import { FC, useRef, useState } from 'react'
 
 import { IPersonalData } from 'types/index'
 
@@ -27,10 +27,16 @@ export const Sidebar: FC<IPersonalData> = props => {
     day: 'numeric',
   })
 
-  const sidebarRef = useRef<HTMLElement>(null)
+  const [active, setActive] = useState<boolean>(false)
 
   return (
-    <aside className={sidebarStyles.sidebar} ref={sidebarRef}>
+    <aside
+      className={
+        !active
+          ? sidebarStyles.sidebar
+          : [sidebarStyles.sidebar, sidebarStyles.active].join(' ')
+      }
+    >
       <div className={sidebarStyles.sidebar_info}>
         <figure className={sidebarStyles.avatar_box}>
           <img src={avatar.src} alt={props.about.name} width={80} />
@@ -42,11 +48,17 @@ export const Sidebar: FC<IPersonalData> = props => {
           <p className={sidebarStyles.title}>{props.about.label}</p>
         </div>
         <button
-          className={sidebarStyles.info_more_btn}
-          onClick={() => elementToggle(sidebarRef)}
+          className={
+            !active
+              ? sidebarStyles.info_more_btn
+              : [sidebarStyles.info_more_btn, sidebarStyles.btn_active].join(
+                  ' ',
+                )
+          }
+          onClick={() => setActive(!active)}
         >
           <span>Show Contacts</span>
-          <Icon path={mdiChevronDown} />
+          <Icon path={mdiChevronDown} rotate={!active ? 0 : 180} />
         </button>
       </div>
 
@@ -134,12 +146,5 @@ function mapSocialItems(socialLinks: IPersonalData['about']['profiles']) {
     })
   } else {
     console.error('MISSING data.about.profiles')
-  }
-}
-
-function elementToggle(elem: React.RefObject<HTMLElement>) {
-  const aside = elem.current
-  if (aside != null) {
-    aside.classList.toggle(sidebarStyles.active)
   }
 }
