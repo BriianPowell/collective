@@ -208,6 +208,7 @@ function ReturnForm(
         sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
         size="invisible"
         onChange={onReCAPTCHAChange}
+        badge={'inline'}
       />
       <button
         className={contactStyles.form_btn}

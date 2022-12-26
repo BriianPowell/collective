@@ -67,7 +67,7 @@ function renderNavbar(
                   setActivePage(prevState => {
                     return prevState.map(item => {
                       return item.title === l.title
-                        ? { ...item, isActive: !item.isActive }
+                        ? { ...item, isActive: true }
                         : { ...item, isActive: false }
                     })
                   })
