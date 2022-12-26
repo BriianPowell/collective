@@ -81,15 +81,35 @@ export const data: IPersonalData = {
         organization: 'California State University, Long Beach',
         duration: '2016 - 2018',
         title: 'Bachelor of Science (BS), Computer Science',
-        text: "Activities and societies: Sigma Chi Fraternity Graduated from California State University, Long Beach with a Bachelor's Degree in Computer Science with a 3.0 GPA.",
+        text: "Activities and Societies: Sigma Chi Fraternity//Graduated with a Bachelor's Degree in Computer Science with a 3.0 GPA.",
       },
       {
         organization: 'Santiago Canyon College',
         duration: '2013 - 2016',
         title: 'Associate of Science (AS) for Transfer, Physics, Mathematics',
-        text: 'Activities and societies: Indoor and outdoor intramural soccer (Stem)^2 Succeeded in finishing my term at this college and graduated with a 3.1 GPA',
+        text: 'Activities and Societies: Indoor and outdoor intramural soccer, (Stem)^2//Succeeded in completing my tenure and graduated with a 3.1 GPA',
       },
     ],
-    experience: [{ organization: '', duration: '', title: '', text: '' }],
+    experience: [
+      {
+        organization: 'Mckinsey & Company',
+        duration: '2022 - Present',
+        title: 'Engineer II, Cloud',
+        text: '',
+      },
+      {
+        organization: 'First American Financial Corporation',
+        duration: '2019 - 2022',
+        title: 'Software Engineer',
+        text: 'Developed and deployed a C# SDK for internal applications to seamlessly integrate with backend APIs hosted on AWS API Gateway//Contributed to several applications (C#, Python, JavaScript) to successfully modernize them from our on-premises server warehouse to a server-less architecture within AWS//Utilized several AWS offerings to build out applications in an effective manner (AWS API Gateway, S3, CloudFront, DocumentDB, RDS, AWS Lambda, etc.)//Incorporated Terraform/Terragrunt to efficiently maintain and deploy applications using CI/CD pipelines to quickly delivery updates and improvements to applications',
+      },
+    ],
+    certificates: [
+      {
+        title: 'Solutions Architect - Associate',
+        organization: 'Amazon Web Services (AWS)',
+        link: 'https://www.credly.com/badges/1861a356-44d4-47ea-9276-f41af470d87c',
+      },
+    ],
   },
 }

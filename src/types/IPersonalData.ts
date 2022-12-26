@@ -71,5 +71,10 @@ export interface IPersonalData {
       title?: string
       text?: string
     }[]
+    certificates?: {
+      title?: string
+      organization?: string
+      link?: string
+    }[]
   }
 }
