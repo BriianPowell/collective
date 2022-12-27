@@ -171,6 +171,7 @@ function ReturnForm(
             setFieldValue(e.currentTarget!.name, e.currentTarget!.value)
             handleChange(e.currentTarget!.name, e.currentTarget!.value)
           }}
+          order={1}
           required
         />
 
@@ -203,13 +204,6 @@ function ReturnForm(
         required
       ></Field>
 
-      <ReCAPTCHA
-        ref={recaptchaRef}
-        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-        size="invisible"
-        onChange={onReCAPTCHAChange}
-        badge="bottomleft"
-      />
       <button
         className={contactStyles.form_btn}
         type="submit"
@@ -224,6 +218,13 @@ function ReturnForm(
           <span>Send Message</span>
         )}
       </button>
+      <ReCAPTCHA
+        ref={recaptchaRef}
+        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+        size="invisible"
+        onChange={onReCAPTCHAChange}
+        badge="inline"
+      />
     </Form>
   )
 }

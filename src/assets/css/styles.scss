@@ -323,3 +323,16 @@ main {
     gap: 25px;
   }
 }
+
+.grecaptcha-badge {
+  margin: auto;
+  margin-top: 15px;
+}
+
+@media (min-width: 768px) {
+  .grecaptcha-badge {
+    margin: 0;
+    margin-right: auto;
+    margin-top: 15px;
+  }
+}
