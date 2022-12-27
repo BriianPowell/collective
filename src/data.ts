@@ -11,6 +11,7 @@ export const data: IPersonalData = {
     label: 'Software Engineer',
     description: "Welcome to Brian's Personal Portfolio",
     birthday: new Date(1995, 10, 2),
+    sign: 'Scorpio',
     summary: '',
     image_url: '',
     email: 'brian@powell.place',

@@ -13,6 +13,7 @@ import {
   mdiMapMarkerOutline,
   mdiCalendarTodayOutline,
   mdiGithub,
+  mdiZodiacScorpio,
 } from '@mdi/js'
 
 import avatar from 'images/avatar1.png'
@@ -92,11 +93,11 @@ export const Sidebar: FC<IPersonalData> = props => {
 
           <li className={sidebarStyles.contact_item}>
             <div className={sharedStyles.icon_box}>
-              <Icon path={mdiCalendarTodayOutline} />
+              <Icon path={mdiZodiacScorpio} />
             </div>
             <div className={sidebarStyles.contact_info}>
-              <p className={sidebarStyles.contact_title}>Birthday</p>
-              <span>{birthday}</span>
+              <p className={sidebarStyles.contact_title}>Zodiac Sign</p>
+              <span>{props.about.sign}</span>
             </div>
           </li>
 

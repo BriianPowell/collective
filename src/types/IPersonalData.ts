@@ -11,6 +11,7 @@ export interface IPersonalData {
     label?: string
     description?: string
     birthday?: Date
+    sign?: string
     /** A longer description of yourself */
     summary?: string
     /** URL to image of yourself or a personal logo */
