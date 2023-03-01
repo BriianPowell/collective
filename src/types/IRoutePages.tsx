@@ -1,5 +1,5 @@
 export interface IRoutePages {
-  title: string
-  render: object
-  isActive: boolean
+  title: string;
+  render: object;
+  isActive: boolean;
 }

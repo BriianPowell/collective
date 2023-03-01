@@ -1,6 +1,10 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState } from 'react';
 
-import { IAppContext, IFormikContext, IContextProviderProps } from 'types/index'
+import {
+  IAppContext,
+  IFormikContext,
+  IContextProviderProps,
+} from 'types/index';
 
 const InitialAppContext: IAppContext = {
   formContent: {
@@ -12,20 +16,20 @@ const InitialAppContext: IAppContext = {
     submitted: false,
   },
   setContext: (): void => {
-    throw new Error('setContext function must be overriden')
+    throw new Error('setContext function must be overriden');
   },
-}
+};
 
-const AppContext = createContext<IAppContext>(InitialAppContext)
+const AppContext = createContext<IAppContext>(InitialAppContext);
 
-const useAppContext = () => useContext(AppContext)
+const useAppContext = () => useContext(AppContext);
 
 const AppContextProvider = ({
   children,
 }: IContextProviderProps): JSX.Element => {
   const [formContext, setFormContent] = useState<IFormikContext>(
-    InitialAppContext.formContent,
-  )
+    InitialAppContext.formContent
+  );
 
   return (
     <AppContext.Provider
@@ -33,10 +37,10 @@ const AppContextProvider = ({
     >
       {children}
     </AppContext.Provider>
-  )
-}
+  );
+};
 
-export { useAppContext, AppContextProvider }
+export { useAppContext, AppContextProvider };
 
 /* Resources:
  ** https://reactjs.org/docs/context.html

@@ -1,41 +1,41 @@
-import { FC, useMemo, useRef, ChangeEvent, useState } from 'react'
-import { GoogleMap, useLoadScript } from '@react-google-maps/api'
-import ReCAPTCHA from 'react-google-recaptcha'
-import { Formik, Form, Field } from 'formik'
-import * as yup from 'yup'
+import { FC, useMemo, useRef, ChangeEvent, useState } from 'react';
+import { GoogleMap, useLoadScript } from '@react-google-maps/api';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { Formik, Form, Field } from 'formik';
+import * as yup from 'yup';
 
-import { IPersonalData, IFormikContext } from 'types/index'
-import { useAppContext } from 'utils/AppContextProvider'
+import { IPersonalData, IFormikContext } from 'types/index';
+import { useAppContext } from 'utils/AppContextProvider';
 
-import Icon from '@mdi/react'
-import { mdiSendOutline } from '@mdi/js'
+import Icon from '@mdi/react';
+import { mdiSendOutline } from '@mdi/js';
 
-import contactStyles from 'css/contact.module.scss'
-import sharedStyles from 'css/shared.module.scss'
+import contactStyles from 'css/contact.module.scss';
+import sharedStyles from 'css/shared.module.scss';
 
-export const Contact: FC<IPersonalData> = props => {
+export const Contact: FC<IPersonalData> = (props) => {
   const { isLoaded } = useLoadScript({
     id: 'collective-map-script',
     googleMapsApiKey: process.env.NEXT_PUBLIC_MAPS_API_KEY!,
-  })
+  });
 
-  const mapCenter = useMemo(() => ({ lat: 33.660057, lng: -117.99897 }), [])
+  const mapCenter = useMemo(() => ({ lat: 33.660057, lng: -117.99897 }), []);
 
-  const { formContent, setContext } = useAppContext()
-  const [submitted, setSubmitted] = useState(formContent.submitted)
+  const { formContent, setContext } = useAppContext();
+  const [submitted, setSubmitted] = useState(formContent.submitted);
 
   function setSubmitContext(values: IFormikContext) {
-    formContent.email = values.email
-    formContent.fullname = values.fullname
-    formContent.message = values.message
-    formContent.submitted = values.submitted
-    setSubmitted(formContent.submitted)
-    setContext(formContent)
+    formContent.email = values.email;
+    formContent.fullname = values.fullname;
+    formContent.message = values.message;
+    formContent.submitted = values.submitted;
+    setSubmitted(formContent.submitted);
+    setContext(formContent);
   }
 
   function setFieldContext(field: string, value: string) {
-    formContent[field] = value
-    setContext(formContent)
+    formContent[field] = value;
+    setContext(formContent);
   }
 
   return (
@@ -77,14 +77,14 @@ export const Contact: FC<IPersonalData> = props => {
           }}
           onSubmit={(values: IFormikContext, { setSubmitting, resetForm }) => {
             try {
-              postFormData(values)
-              setSubmitContext({ ...values, submitted: true })
+              postFormData(values);
+              setSubmitContext({ ...values, submitted: true });
             } catch (err) {
-              console.log('Error on Web3Forms Call', err)
-              resetForm()
-              setSubmitContext({ ...values, submitted: false })
+              console.log('Error on Web3Forms Call', err);
+              resetForm();
+              setSubmitContext({ ...values, submitted: false });
             }
-            setSubmitting(false)
+            setSubmitting(false);
           }}
           validationSchema={yup.object({
             fullname: yup.string().required('Name is required'),
@@ -113,15 +113,15 @@ export const Contact: FC<IPersonalData> = props => {
                 setFieldContext,
                 setFieldValue,
                 setSubmitting,
-                submitForm,
+                submitForm
               )}
             </>
           )}
         </Formik>
       </section>
     </article>
-  )
-}
+  );
+};
 
 function ReturnForm(
   isSubmitting: boolean,
@@ -131,25 +131,25 @@ function ReturnForm(
   handleChange: any,
   setFieldValue: any,
   setSubmitting: any,
-  submitForm: any,
+  submitForm: any
 ) {
-  let recaptchaRef = useRef<ReCAPTCHA>(null)
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const onReCAPTCHAChange = (captchaCode: string | null) => {
     if (!captchaCode) {
-      return
+      return;
     }
-    recaptchaRef.current!.reset()
-    setSubmitting(true)
-    submitForm()
-  }
+    recaptchaRef.current!.reset();
+    setSubmitting(true);
+    submitForm();
+  };
 
   return (
     <Form
       className={contactStyles.form}
-      onSubmit={e => {
-        e.preventDefault()
-        recaptchaRef.current?.execute()
+      onSubmit={(e) => {
+        e.preventDefault();
+        recaptchaRef.current?.execute();
       }}
     >
       <div className={contactStyles.input_wrapper}>
@@ -168,8 +168,8 @@ function ReturnForm(
           placeholder="Full Name"
           values={values.fullname}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            setFieldValue(e.currentTarget!.name, e.currentTarget!.value)
-            handleChange(e.currentTarget!.name, e.currentTarget!.value)
+            setFieldValue(e.currentTarget!.name, e.currentTarget!.value);
+            handleChange(e.currentTarget!.name, e.currentTarget!.value);
           }}
           order={1}
           required
@@ -183,8 +183,8 @@ function ReturnForm(
           placeholder="Email Address"
           values={values.email}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            setFieldValue(e.currentTarget!.name, e.currentTarget!.value)
-            handleChange(e.currentTarget!.name, e.currentTarget!.value)
+            setFieldValue(e.currentTarget!.name, e.currentTarget!.value);
+            handleChange(e.currentTarget!.name, e.currentTarget!.value);
           }}
           required
         />
@@ -198,8 +198,8 @@ function ReturnForm(
         placeholder="Message"
         values={values.message}
         onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
-          setFieldValue(e.currentTarget!.name, e.currentTarget!.value)
-          handleChange(e.currentTarget!.name, e.currentTarget!.value)
+          setFieldValue(e.currentTarget!.name, e.currentTarget!.value);
+          handleChange(e.currentTarget!.name, e.currentTarget!.value);
         }}
         required
       ></Field>
@@ -226,7 +226,7 @@ function ReturnForm(
         badge="inline"
       />
     </Form>
-  )
+  );
 }
 
 function postFormData(values: IFormikContext) {
@@ -237,9 +237,9 @@ function postFormData(values: IFormikContext) {
       Accept: 'application/json',
     },
     body: JSON.stringify(values),
-  }).then(async response => {
+  }).then(async (response) => {
     response.status === 200
       ? console.log(`${response.status} Contact Requested!`)
-      : console.log(response)
-  })
+      : console.log(response);
+  });
 }

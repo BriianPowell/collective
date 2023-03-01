@@ -1,10 +1,10 @@
-import Head from 'next/head'
+import Head from 'next/head';
 
-import { data } from 'data'
-import AppContainer from 'containers/AppContainer'
+import { data } from 'data';
+import AppContainer from 'containers/AppContainer';
 
 export default function Home() {
-  const title = data.about.name
+  const title = data.about.name;
 
   return (
     <>
@@ -50,5 +50,5 @@ export default function Home() {
       </Head>
       <AppContainer {...data} />
     </>
-  )
+  );
 }

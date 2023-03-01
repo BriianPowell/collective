@@ -1,18 +1,18 @@
-import { FC } from 'react'
+import { FC } from 'react';
 
-import { IPersonalData } from 'types/index'
+import { IPersonalData } from 'types/index';
 
-import Icon from '@mdi/react'
+import Icon from '@mdi/react';
 import {
   mdiSchoolOutline,
   mdiBookOpenPageVariantOutline,
   mdiCertificateOutline,
-} from '@mdi/js'
+} from '@mdi/js';
 
-import sharedStyles from 'css/shared.module.scss'
-import resumeStyles from 'css/resume.module.scss'
+import sharedStyles from 'css/shared.module.scss';
+import resumeStyles from 'css/resume.module.scss';
 
-export const Resume: FC<IPersonalData> = props => {
+export const Resume: FC<IPersonalData> = (props) => {
   return (
     <article className={resumeStyles.resume}>
       <header>
@@ -63,25 +63,25 @@ export const Resume: FC<IPersonalData> = props => {
         </ul>
       </section>
     </article>
-  )
-}
+  );
+};
 
 function renderTimeline(
   data:
     | {
-        organization?: string | undefined
-        duration?: string | undefined
-        title?: string | undefined
-        text?: string | undefined
+        organization?: string | undefined;
+        duration?: string | undefined;
+        title?: string | undefined;
+        text?: string | undefined;
       }[]
-    | undefined,
+    | undefined
 ) {
-  return data?.map(item => {
+  return data?.map((item) => {
     return (
       <li className={resumeStyles.timeline_item} key={item.organization}>
         <h4
           className={[sharedStyles.h4, resumeStyles.timeline_item_title].join(
-            ' ',
+            ' '
           )}
         >
           {item.organization}
@@ -93,29 +93,29 @@ function renderTimeline(
 
         <ol className={resumeStyles.timeline_text}>
           {item.text?.split('//').map((item, k) => {
-            if (item != '') return <li key={k}>&#x2022; {item}</li>
+            if (item != '') return <li key={k}>&#x2022; {item}</li>;
           })}
         </ol>
       </li>
-    )
-  })
+    );
+  });
 }
 
 function renderCertificates(
   data:
     | {
-        title?: string | undefined
-        organization?: string | undefined
-        link?: string | undefined
+        title?: string | undefined;
+        organization?: string | undefined;
+        link?: string | undefined;
       }[]
-    | undefined,
+    | undefined
 ) {
-  return data?.map(item => {
+  return data?.map((item) => {
     return (
       <li className={resumeStyles.timeline_item} key={item.title}>
         <h4
           className={[sharedStyles.h4, resumeStyles.timeline_item_title].join(
-            ' ',
+            ' '
           )}
         >
           <a
@@ -131,6 +131,6 @@ function renderCertificates(
           <b>{item.organization}</b>
         </span>
       </li>
-    )
-  })
+    );
+  });
 }

@@ -1,81 +1,79 @@
-import { string } from 'yup'
-
 export interface IPersonalData {
   about: {
     /** Your full name as it should appear on your resume */
-    name: string
+    name: string;
     /**
      * A short description of what you do
      * @example "Full Stack Software Engineer"
      */
-    label?: string
-    description?: string
-    birthday?: Date
-    sign?: string
+    label?: string;
+    description?: string;
+    birthday?: Date;
+    sign?: string;
     /** A longer description of yourself */
-    summary?: string
+    summary?: string;
     /** URL to image of yourself or a personal logo */
-    image_url?: string
-    email?: string
-    phone?: string
+    image_url?: string;
+    email?: string;
+    phone?: string;
     /**
      * Your physical location.
      * This could be your address, or just a city, etc
      */
-    location?: string
+    location?: string;
     bio?: {
-      p1: string
-      p2: string
-    }
+      p1: string;
+      p2: string;
+    };
     website?: {
       /**
        * Actual URL
        * @example "https://powell.place"
        */
-      url: string
+      url: string;
       /**
        * Pretty version of URL
        * @example "powell.place"
        */
-      pretty: string
-    }
+      pretty: string;
+    };
     profiles?: {
       /** Name of the social network */
-      network: string
+      network: string;
       /**
        * Your username on the network
        * @example "BriianPowell"
        */
-      username: string
+      username: string;
       /**
        * A link to your profile on the network
        * @example "https://github.com/BriianPowell"
        */
-      url: string
-    }[]
+      url: string;
+    }[];
     services?: {
-      iconSrc?: string
-      iconSize?: number
-      iconAlt?: string
-      title?: string
-      text?: string
-    }[]
+      iconSrc?: string;
+      iconSize?: number;
+      iconAlt?: string;
+      title?: string;
+      text?: string;
+    }[];
     education?: {
-      organization?: string
-      duration?: string
-      title?: string
-      text?: string
-    }[]
+      organization?: string;
+      duration?: string;
+      title?: string;
+      text?: string;
+    }[];
     experience?: {
-      organization?: string
-      duration?: string
-      title?: string
-      text?: string
-    }[]
+      organization?: string;
+      duration?: string;
+      title?: string;
+      text?: string;
+    }[];
     certificates?: {
-      title?: string
-      organization?: string
-      link?: string
-    }[]
-  }
+      title?: string;
+      organization?: string;
+      link?: string;
+    }[];
+  };
 }

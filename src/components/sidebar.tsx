@@ -1,8 +1,8 @@
-import { FC, useRef, useState } from 'react'
+import { FC, useState } from 'react';
 
-import { IPersonalData } from 'types/index'
+import { IPersonalData } from 'types/index';
 
-import Icon from '@mdi/react'
+import Icon from '@mdi/react';
 import {
   mdiChevronDown,
   mdiEmailOutline,
@@ -11,24 +11,23 @@ import {
   mdiTwitter,
   mdiLinkedin,
   mdiMapMarkerOutline,
-  mdiCalendarTodayOutline,
   mdiGithub,
   mdiZodiacScorpio,
-} from '@mdi/js'
+} from '@mdi/js';
 
-import avatar from 'images/avatar1.png'
-import sidebarStyles from 'css/sidebar.module.scss'
-import sharedStyles from 'css/shared.module.scss'
+import avatar from 'images/avatar1.png';
+import sidebarStyles from 'css/sidebar.module.scss';
+import sharedStyles from 'css/shared.module.scss';
 
-export const Sidebar: FC<IPersonalData> = props => {
-  const mailLink: string = `mailto:${props.about.email}`
-  const phoneLink: string = `tel:${props.about.phone}`
-  const birthday: string = props.about.birthday!.toLocaleDateString('en-US', {
-    month: 'long',
-    day: 'numeric',
-  })
+export const Sidebar: FC<IPersonalData> = (props) => {
+  const mailLink = `mailto:${props.about.email}`;
+  const phoneLink = `tel:${props.about.phone}`;
+  // const birthday: string = props.about.birthday!.toLocaleDateString('en-US', {
+  //   month: 'long',
+  //   day: 'numeric',
+  // });
 
-  const [active, setActive] = useState<boolean>(false)
+  const [active, setActive] = useState<boolean>(false);
 
   return (
     <aside
@@ -53,7 +52,7 @@ export const Sidebar: FC<IPersonalData> = props => {
             !active
               ? sidebarStyles.info_more_btn
               : [sidebarStyles.info_more_btn, sidebarStyles.btn_active].join(
-                  ' ',
+                  ' '
                 )
           }
           onClick={() => setActive(!active)}
@@ -119,8 +118,8 @@ export const Sidebar: FC<IPersonalData> = props => {
         </ul>
       </div>
     </aside>
-  )
-}
+  );
+};
 
 function mapSocialItems(socialLinks: IPersonalData['about']['profiles']) {
   const socialIconMap: { [id: string]: string } = {
@@ -128,10 +127,10 @@ function mapSocialItems(socialLinks: IPersonalData['about']['profiles']) {
     LinkedIn: mdiLinkedin,
     Twitter: mdiTwitter,
     Instagram: mdiInstagram,
-  }
+  };
 
   if (socialLinks != null) {
-    return socialLinks.map(item => {
+    return socialLinks.map((item) => {
       return (
         <li key={item.network} className={sidebarStyles.social_item}>
           <a
@@ -143,9 +142,9 @@ function mapSocialItems(socialLinks: IPersonalData['about']['profiles']) {
             <Icon path={socialIconMap[item.network]} />
           </a>
         </li>
-      )
-    })
+      );
+    });
   } else {
-    console.error('MISSING data.about.profiles')
+    console.error('MISSING data.about.profiles');
   }
 }

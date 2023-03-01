@@ -1,9 +1,9 @@
-import { IPersonalData } from 'types/index'
+import { IPersonalData } from 'types/index';
 
-import cloudIcon from 'images/icon-cloud1.png'
-import frontIcon from 'images/icon-dev1.svg'
-import backIcon from 'images/icon-backend1.png'
-import cicdIcon from 'images/icon-cicd2.png'
+import cloudIcon from 'images/icon-cloud1.png';
+import frontIcon from 'images/icon-dev1.svg';
+import backIcon from 'images/icon-backend1.png';
+import cicdIcon from 'images/icon-cicd2.png';
 
 export const data: IPersonalData = {
   about: {
@@ -113,4 +113,4 @@ export const data: IPersonalData = {
       },
     ],
   },
-}
+};

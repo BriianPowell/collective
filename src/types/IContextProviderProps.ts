@@ -1,3 +1,3 @@
 export interface IContextProviderProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }

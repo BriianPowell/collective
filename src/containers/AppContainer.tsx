@@ -1,26 +1,26 @@
-import { Dispatch, FC, SetStateAction, useState } from 'react'
-import { Poppins } from '@next/font/google'
+import { Dispatch, FC, SetStateAction, useState } from 'react';
+import { Poppins } from '@next/font/google';
 
-import { IPersonalData, IRoutePages } from 'types/index'
-import { Sidebar, About, Resume, Contact } from 'components/index'
-import { AppContextProvider } from 'utils/AppContextProvider'
+import { IPersonalData, IRoutePages } from 'types/index';
+import { Sidebar, About, Resume, Contact } from 'components/index';
+import { AppContextProvider } from 'utils/AppContextProvider';
 
-import sharedStyles from 'css/shared.module.scss'
-import navbarStyles from 'css/navbar.module.scss'
+import sharedStyles from 'css/shared.module.scss';
+import navbarStyles from 'css/navbar.module.scss';
 
 const poppins = Poppins({
   weight: ['300', '400', '500', '600'],
   variable: '--ff-poppins',
-})
+});
 
-const AppContainer: FC<IPersonalData> = props => {
+const AppContainer: FC<IPersonalData> = (props) => {
   const pages: IRoutePages[] = [
     { title: 'About', render: <About {...props} />, isActive: true },
     { title: 'Resume', render: <Resume {...props} />, isActive: false },
     { title: 'Contact', render: <Contact {...props} />, isActive: false },
-  ]
+  ];
 
-  const [activePage, SetActivePage] = useState(pages)
+  const [activePage, SetActivePage] = useState(pages);
 
   return (
     <AppContextProvider>
@@ -32,17 +32,17 @@ const AppContainer: FC<IPersonalData> = props => {
         </div>
       </main>
     </AppContextProvider>
-  )
-}
+  );
+};
 
 function renderNavbar(
   pages: IRoutePages[],
-  setActivePage: Dispatch<SetStateAction<IRoutePages[]>>,
+  setActivePage: Dispatch<SetStateAction<IRoutePages[]>>
 ) {
   const mouseEvent = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const btn: HTMLButtonElement = event.currentTarget
-    btn.classList.toggle(navbarStyles.hover)
-  }
+    const btn: HTMLButtonElement = event.currentTarget;
+    btn.classList.toggle(navbarStyles.hover);
+  };
 
   return (
     <nav className={navbarStyles.navbar}>
@@ -51,7 +51,7 @@ function renderNavbar(
           return (
             <li
               className={[navbarStyles.navbar_item, navbarStyles.hover].join(
-                ' ',
+                ' '
               )}
               key={i}
             >
@@ -64,35 +64,35 @@ function renderNavbar(
                 onMouseOver={mouseEvent}
                 onMouseOut={mouseEvent}
                 onClick={() => {
-                  setActivePage(prevState => {
-                    return prevState.map(item => {
+                  setActivePage((prevState) => {
+                    return prevState.map((item) => {
                       return item.title === l.title
                         ? { ...item, isActive: true }
-                        : { ...item, isActive: false }
-                    })
-                  })
+                        : { ...item, isActive: false };
+                    });
+                  });
                 }}
               >
                 {l.title}
               </button>
             </li>
-          )
+          );
         })}
       </ul>
     </nav>
-  )
+  );
 }
 
 function renderActivePage(pages: IRoutePages[]) {
-  const renderPageRes = pages.find(item => {
-    return item.isActive === true
-  })
+  const renderPageRes = pages.find((item) => {
+    return item.isActive === true;
+  });
 
   if (renderPageRes != null) {
-    return renderPageRes.render
+    return renderPageRes.render;
   } else {
-    console.error('NO PAGE TO RENDER')
+    console.error('NO PAGE TO RENDER');
   }
 }
 
-export default AppContainer
+export default AppContainer;

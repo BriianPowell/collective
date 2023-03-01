@@ -11,10 +11,18 @@
   },
   "private": true,
   "scripts": {
+    "prepare": "husky install",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettier:write": "prettier '**/*.{ts,tsx}' --write",
+    "prettier:check": "prettier '**/*.{ts,tsx}' --check"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "eslint"
+    ]
   },
   "dependencies": {
     "@mdi/js": "^7.1.96",
@@ -32,13 +40,17 @@
   "devDependencies": {
     "@cloudflare/next-on-pages": "^0.2.0",
     "@types/react-google-recaptcha": "^2.1.5",
-    "eslint": "^8.30.0",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
+    "eslint": "^8.35.0",
     "eslint-config-next": "^13.0.7",
-    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
     "formik": "^2.2.9",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.2",
     "patch-package": "^6.5.0",
-    "prettier": "2.8.1",
+    "prettier": "^2.8.1",
     "react-google-recaptcha": "^2.1.0",
     "sass": "^1.57.0",
     "typescript": "^4.9.4",
