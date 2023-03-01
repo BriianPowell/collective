@@ -28,6 +28,7 @@ jobs:
 
       - name: Lintify Code 🚨
         run: |
+          npm i
           npm run lint
 
   prettier:
@@ -48,4 +49,5 @@ jobs:
 
       - name: Prettier Check 💅
         run: |
+          npm i
           npm run prettier:check
