@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import { IPersonalData } from 'types/index';
 
 import aboutStyles from 'css/about.module.scss';
 import sharedstyles from 'css/shared.module.scss';
+import { IPersonalData } from 'types/index';
 
 export const About: FC<IPersonalData> = (props) => {
   return (

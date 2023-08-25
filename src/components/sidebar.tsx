@@ -1,23 +1,21 @@
-import { FC, useState } from 'react';
-
-import { IPersonalData } from 'types/index';
-
-import Icon from '@mdi/react';
 import {
+  mdiCellphone,
   mdiChevronDown,
   mdiEmailOutline,
-  mdiCellphone,
+  mdiGithub,
   mdiInstagram,
-  mdiTwitter,
   mdiLinkedin,
   mdiMapMarkerOutline,
-  mdiGithub,
+  mdiTwitter,
   mdiZodiacScorpio,
 } from '@mdi/js';
+import Icon from '@mdi/react';
+import { FC, useState } from 'react';
 
-import avatar from 'images/avatar1.png';
-import sidebarStyles from 'css/sidebar.module.scss';
 import sharedStyles from 'css/shared.module.scss';
+import sidebarStyles from 'css/sidebar.module.scss';
+import avatar from 'images/avatar1.png';
+import { IPersonalData } from 'types/index';
 
 export const Sidebar: FC<IPersonalData> = (props) => {
   const mailLink = `mailto:${props.about.email}`;

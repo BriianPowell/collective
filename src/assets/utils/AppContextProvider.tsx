@@ -2,8 +2,8 @@ import { createContext, useContext, useState } from 'react';
 
 import {
   IAppContext,
-  IFormikContext,
   IContextProviderProps,
+  IFormikContext,
 } from 'types/index';
 
 const InitialAppContext: IAppContext = {

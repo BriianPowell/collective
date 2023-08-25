@@ -1,17 +1,15 @@
-import { FC, useMemo, useRef, ChangeEvent, useState } from 'react';
-import { GoogleMap, useLoadScript } from '@react-google-maps/api';
-import ReCAPTCHA from 'react-google-recaptcha';
-import { Formik, Form, Field } from 'formik';
-import * as yup from 'yup';
-
-import { IPersonalData, IFormikContext } from 'types/index';
-import { useAppContext } from 'utils/AppContextProvider';
-
-import Icon from '@mdi/react';
 import { mdiSendOutline } from '@mdi/js';
+import Icon from '@mdi/react';
+import { GoogleMap, useLoadScript } from '@react-google-maps/api';
+import { Field, Form, Formik } from 'formik';
+import { ChangeEvent, FC, useMemo, useRef, useState } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
+import * as yup from 'yup';
 
 import contactStyles from 'css/contact.module.scss';
 import sharedStyles from 'css/shared.module.scss';
+import { IFormikContext, IPersonalData } from 'types/index';
+import { useAppContext } from 'utils/AppContextProvider';
 
 export const Contact: FC<IPersonalData> = (props) => {
   const { isLoaded } = useLoadScript({

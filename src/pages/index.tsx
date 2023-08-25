@@ -1,7 +1,7 @@
 import Head from 'next/head';
 
-import { data } from 'data';
 import AppContainer from 'containers/AppContainer';
+import { data } from 'data';
 
 export default function Home() {
   const title = data.about.name;

@@ -1,16 +1,14 @@
-import { FC } from 'react';
-
-import { IPersonalData } from 'types/index';
-
-import Icon from '@mdi/react';
 import {
-  mdiSchoolOutline,
   mdiBookOpenPageVariantOutline,
   mdiCertificateOutline,
+  mdiSchoolOutline,
 } from '@mdi/js';
+import Icon from '@mdi/react';
+import { FC } from 'react';
 
-import sharedStyles from 'css/shared.module.scss';
 import resumeStyles from 'css/resume.module.scss';
+import sharedStyles from 'css/shared.module.scss';
+import { IPersonalData } from 'types/index';
 
 export const Resume: FC<IPersonalData> = (props) => {
   return (

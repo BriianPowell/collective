@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  eslint:
+  lintify:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Branch
@@ -31,7 +31,7 @@ jobs:
           npm i
           npm run lint
 
-  prettier:
+  prettify:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Branch
