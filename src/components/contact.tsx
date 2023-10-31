@@ -10,11 +10,12 @@ import contactStyles from 'css/contact.module.scss';
 import sharedStyles from 'css/shared.module.scss';
 import { IFormikContext, IPersonalData, WidgetStatus } from 'types/index';
 import { useAppContext } from 'utils/AppContextProvider';
+import { getEnv } from 'utils/env';
 
 export const Contact: FC<IPersonalData> = () => {
   const { isLoaded } = useLoadScript({
     id: 'collective-map-script',
-    googleMapsApiKey: process.env.NEXT_PUBLIC_MAPS_API_KEY!,
+    googleMapsApiKey: getEnv(MAPS_API_KEY_NAME),
   });
 
   const mapCenter = useMemo(() => ({ lat: 33.660057, lng: -117.99897 }), []);
