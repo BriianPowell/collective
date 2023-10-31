@@ -1,20 +1,23 @@
+import { MAPS_API_KEY_NAME, TURNSTILE_SITE_KEY_NAME } from 'constants';
+import { Turnstile, TurnstileInstance } from '@marsidev/react-turnstile';
 import { mdiSendOutline } from '@mdi/js';
 import Icon from '@mdi/react';
 import { GoogleMap, useLoadScript } from '@react-google-maps/api';
 import { Field, Form, Formik } from 'formik';
 import { ChangeEvent, FC, useMemo, useRef, useState } from 'react';
-import ReCAPTCHA from 'react-google-recaptcha';
+// import ReCAPTCHA from 'react-google-recaptcha';
 import * as yup from 'yup';
 
 import contactStyles from 'css/contact.module.scss';
 import sharedStyles from 'css/shared.module.scss';
 import { IFormikContext, IPersonalData } from 'types/index';
 import { useAppContext } from 'utils/AppContextProvider';
+import { getEnv } from 'utils/env';
 
-export const Contact: FC<IPersonalData> = (props) => {
+export const Contact: FC<IPersonalData> = () => {
   const { isLoaded } = useLoadScript({
     id: 'collective-map-script',
-    googleMapsApiKey: process.env.NEXT_PUBLIC_MAPS_API_KEY!,
+    googleMapsApiKey: getEnv(MAPS_API_KEY_NAME),
   });
 
   const mapCenter = useMemo(() => ({ lat: 33.660057, lng: -117.99897 }), []);
@@ -131,13 +134,10 @@ function ReturnForm(
   setSubmitting: any,
   submitForm: any
 ) {
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const turnstileRef = useRef<TurnstileInstance>();
 
-  const onReCAPTCHAChange = (captchaCode: string | null) => {
-    if (!captchaCode) {
-      return;
-    }
-    recaptchaRef.current!.reset();
+  const onTurnstileSuccess = () => {
+    turnstileRef.current?.reset();
     setSubmitting(true);
     submitForm();
   };
@@ -147,7 +147,7 @@ function ReturnForm(
       className={contactStyles.form}
       onSubmit={(e) => {
         e.preventDefault();
-        recaptchaRef.current?.execute();
+        turnstileRef.current?.execute();
       }}
     >
       <div className={contactStyles.input_wrapper}>
@@ -216,12 +216,10 @@ function ReturnForm(
           <span>Send Message</span>
         )}
       </button>
-      <ReCAPTCHA
-        ref={recaptchaRef}
-        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-        size="invisible"
-        onChange={onReCAPTCHAChange}
-        badge="inline"
+      <Turnstile
+        ref={turnstileRef}
+        siteKey={getEnv(TURNSTILE_SITE_KEY_NAME)}
+        onSuccess={() => onTurnstileSuccess()}
       />
     </Form>
   );

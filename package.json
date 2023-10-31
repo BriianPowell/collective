@@ -28,6 +28,7 @@
     ]
   },
   "dependencies": {
+    "@marsidev/react-turnstile": "^0.3.2",
     "@mdi/js": "^7.1.96",
     "@mdi/react": "^1.6.1",
     "@next/font": "13.0.7",
