@@ -9,10 +9,9 @@ This project takes influences from [@DudeofAwesome](https://github.com/dudeofawe
 | Key                            | Value                                                        |
 | ------------------------------ | ------------------------------------------------------------ |
 | NEXT_PUBLIC_FORMS_KEY          | Key for Web3Forms access to allow contact page functionality |
-| NEXT_PUBLIC_RECAPTCHA_SITE_KEY | Key for Google ReCAPTCHA access                              |
+| NEXT_PUBLIC_RECAPTCHA_SITE_KEY | Key for Google ReCAPTCHA access   (DEPRECATED)               |
 | NEXT_PUBLIC_MAPS_API_KEY       | Key for Google Maps access                                   |
-
-
+| NEXT_PUBLIC_TURNSTILE_SITE_KEY | Key for Cloudflare Turnstile
 
 <details>
   <summary>NextJS README</summary>
