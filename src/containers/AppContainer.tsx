@@ -10,6 +10,7 @@ import { AppContextProvider } from 'utils/AppContextProvider';
 const poppins = Poppins({
   weight: ['300', '400', '500', '600'],
   variable: '--ff-poppins',
+  subsets: ['latin'],
 });
 
 const AppContainer: FC<IPersonalData> = (props) => {
