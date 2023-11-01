@@ -1,4 +1,4 @@
-import { Poppins } from '@next/font/google';
+import { Poppins } from 'next/font/google';
 import { Dispatch, FC, SetStateAction, useState } from 'react';
 
 import { About, Contact, Resume, Sidebar } from 'components/index';
