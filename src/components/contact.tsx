@@ -1,29 +1,30 @@
-import { MAPS_API_KEY_NAME, TURNSTILE_SITE_KEY_NAME } from 'constants';
 import { Turnstile, TurnstileInstance } from '@marsidev/react-turnstile';
 import { mdiSendOutline } from '@mdi/js';
-import Icon from '@mdi/react';
+import { Icon } from '@mdi/react';
 import { GoogleMap, useLoadScript } from '@react-google-maps/api';
 import { Field, Form, Formik } from 'formik';
 import { ChangeEvent, FC, useMemo, useRef, useState } from 'react';
-// import ReCAPTCHA from 'react-google-recaptcha';
 import * as yup from 'yup';
 
 import contactStyles from 'css/contact.module.scss';
 import sharedStyles from 'css/shared.module.scss';
-import { IFormikContext, IPersonalData } from 'types/index';
+import { IFormikContext, IPersonalData, WidgetStatus } from 'types/index';
 import { useAppContext } from 'utils/AppContextProvider';
-import { getEnv } from 'utils/env';
 
 export const Contact: FC<IPersonalData> = () => {
   const { isLoaded } = useLoadScript({
     id: 'collective-map-script',
-    googleMapsApiKey: getEnv(MAPS_API_KEY_NAME),
+    googleMapsApiKey: process.env.NEXT_PUBLIC_MAPS_API_KEY!,
   });
 
   const mapCenter = useMemo(() => ({ lat: 33.660057, lng: -117.99897 }), []);
 
   const { formContent, setContext } = useAppContext();
   const [submitted, setSubmitted] = useState(formContent.submitted);
+
+  const turnstileRef = useRef<TurnstileInstance>();
+  const [status, setStatus] = useState<WidgetStatus>(null);
+  const [token, setToken] = useState<string>();
 
   function setSubmitContext(values: IFormikContext) {
     formContent.email = values.email;
@@ -78,12 +79,15 @@ export const Contact: FC<IPersonalData> = () => {
           }}
           onSubmit={(values: IFormikContext, { setSubmitting, resetForm }) => {
             try {
-              postFormData(values);
               setSubmitContext({ ...values, submitted: true });
+              postFormData(values);
             } catch (err) {
               console.log('Error on Web3Forms Call', err);
               resetForm();
-              setSubmitContext({ ...values, submitted: false });
+              setSubmitContext({
+                ...values,
+                submitted: false,
+              });
             }
             setSubmitting(false);
           }}
@@ -105,125 +109,117 @@ export const Contact: FC<IPersonalData> = () => {
             setSubmitting,
             submitForm,
           }) => (
-            <>
-              {ReturnForm(
-                isSubmitting,
-                isValid,
-                dirty,
-                values,
-                setFieldContext,
-                setFieldValue,
-                setSubmitting,
-                submitForm
-              )}
-            </>
+            <Form
+              className={contactStyles.form}
+              onSubmit={(e) => {
+                e.preventDefault();
+                setSubmitting(true);
+                submitForm();
+              }}
+            >
+              <div className={contactStyles.input_wrapper}>
+                <Field
+                  type="checkbox"
+                  name="botcheck"
+                  id=""
+                  className={contactStyles.bot_check}
+                />
+
+                <Field
+                  type="text"
+                  id="fullname"
+                  name="fullname"
+                  className={contactStyles.form_input}
+                  placeholder="Full Name"
+                  values={values.fullname}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                    setFieldValue(e.currentTarget.name, e.currentTarget.value);
+                    setFieldContext(
+                      e.currentTarget.name,
+                      e.currentTarget.value
+                    );
+                  }}
+                  order={1}
+                  required
+                />
+
+                <Field
+                  type="email"
+                  id="email"
+                  name="email"
+                  className={contactStyles.form_input}
+                  placeholder="Email Address"
+                  values={values.email}
+                  onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                    setFieldValue(e.currentTarget.name, e.currentTarget.value);
+                    setFieldContext(
+                      e.currentTarget.name,
+                      e.currentTarget.value
+                    );
+                  }}
+                  required
+                />
+              </div>
+
+              <Field
+                component="textarea"
+                id="message"
+                name="message"
+                className={contactStyles.textarea_form_input}
+                placeholder="Message"
+                values={values.message}
+                onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
+                  setFieldValue(e.currentTarget.name, e.currentTarget.value);
+                  setFieldContext(e.currentTarget.name, e.currentTarget.value);
+                }}
+                required
+              ></Field>
+
+              <Turnstile
+                className={contactStyles.form_turnstile}
+                options={{
+                  action: 'submit-form',
+                  theme: 'auto',
+                  size: 'normal',
+                  tabIndex: 10,
+                }}
+                ref={turnstileRef}
+                siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
+                onSuccess={(token) => {
+                  setToken(token);
+                  setStatus('solved');
+                }}
+                onError={() => turnstileRef.current?.reset()}
+                onExpire={() => turnstileRef.current?.reset()}
+              />
+
+              <button
+                className={contactStyles.form_btn}
+                type="submit"
+                disabled={
+                  status != 'solved' ||
+                  dirty ||
+                  !isValid ||
+                  isSubmitting ||
+                  values.submitted
+                }
+              >
+                <Icon path={mdiSendOutline} />
+                {values.submitted ? (
+                  <span>Submitted!</span>
+                ) : isSubmitting ? (
+                  <span>Submitting...</span>
+                ) : (
+                  <span>Send Message</span>
+                )}
+              </button>
+            </Form>
           )}
         </Formik>
       </section>
     </article>
   );
 };
-
-function ReturnForm(
-  isSubmitting: boolean,
-  isValid: boolean,
-  dirty: boolean,
-  values: IFormikContext,
-  handleChange: any,
-  setFieldValue: any,
-  setSubmitting: any,
-  submitForm: any
-) {
-  const turnstileRef = useRef<TurnstileInstance>();
-
-  const onTurnstileSuccess = () => {
-    turnstileRef.current?.reset();
-    setSubmitting(true);
-    submitForm();
-  };
-
-  return (
-    <Form
-      className={contactStyles.form}
-      onSubmit={(e) => {
-        e.preventDefault();
-        turnstileRef.current?.execute();
-      }}
-    >
-      <div className={contactStyles.input_wrapper}>
-        <Field
-          type="checkbox"
-          name="botcheck"
-          id=""
-          className={contactStyles.bot_check}
-        />
-
-        <Field
-          type="text"
-          id="fullname"
-          name="fullname"
-          className={contactStyles.form_input}
-          placeholder="Full Name"
-          values={values.fullname}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            setFieldValue(e.currentTarget!.name, e.currentTarget!.value);
-            handleChange(e.currentTarget!.name, e.currentTarget!.value);
-          }}
-          order={1}
-          required
-        />
-
-        <Field
-          type="email"
-          id="email"
-          name="email"
-          className={contactStyles.form_input}
-          placeholder="Email Address"
-          values={values.email}
-          onChange={(e: ChangeEvent<HTMLInputElement>) => {
-            setFieldValue(e.currentTarget!.name, e.currentTarget!.value);
-            handleChange(e.currentTarget!.name, e.currentTarget!.value);
-          }}
-          required
-        />
-      </div>
-
-      <Field
-        component="textarea"
-        id="message"
-        name="message"
-        className={contactStyles.textarea_form_input}
-        placeholder="Message"
-        values={values.message}
-        onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
-          setFieldValue(e.currentTarget!.name, e.currentTarget!.value);
-          handleChange(e.currentTarget!.name, e.currentTarget!.value);
-        }}
-        required
-      ></Field>
-
-      <button
-        className={contactStyles.form_btn}
-        type="submit"
-        disabled={!dirty || !isValid || isSubmitting || values.submitted}
-      >
-        <Icon path={mdiSendOutline} />
-        {values.submitted ? (
-          <span>Submitted!</span>
-        ) : isSubmitting ? (
-          <span>Submitting...</span>
-        ) : (
-          <span>Send Message</span>
-        )}
-      </button>
-      <Turnstile
-        ref={turnstileRef}
-        siteKey={getEnv(TURNSTILE_SITE_KEY_NAME)}
-        onSuccess={() => onTurnstileSuccess()}
-      />
-    </Form>
-  );
-}
 
 function postFormData(values: IFormikContext) {
   fetch('https://api.web3forms.com/submit', {
