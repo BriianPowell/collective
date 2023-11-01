@@ -3,7 +3,7 @@ import {
   mdiCertificateOutline,
   mdiSchoolOutline,
 } from '@mdi/js';
-import Icon from '@mdi/react';
+import { Icon } from '@mdi/react';
 import { FC } from 'react';
 
 import resumeStyles from 'css/resume.module.scss';
@@ -102,9 +102,9 @@ function renderTimeline(
 function renderCertificates(
   data:
     | {
-        title?: string | undefined;
-        organization?: string | undefined;
-        link?: string | undefined;
+        title: string | undefined;
+        organization: string | undefined;
+        link: string | undefined;
       }[]
     | undefined
 ) {

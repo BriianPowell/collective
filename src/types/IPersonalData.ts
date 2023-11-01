@@ -6,26 +6,26 @@ export interface IPersonalData {
      * A short description of what you do
      * @example "Full Stack Software Engineer"
      */
-    label?: string;
-    description?: string;
-    birthday?: Date;
-    sign?: string;
+    label: string;
+    description: string;
+    birthday: Date;
+    sign: string;
     /** A longer description of yourself */
-    summary?: string;
+    summary: string;
     /** URL to image of yourself or a personal logo */
-    image_url?: string;
-    email?: string;
-    phone?: string;
+    image_url: string;
+    email: string;
+    phone: string;
     /**
      * Your physical location.
      * This could be your address, or just a city, etc
      */
-    location?: string;
-    bio?: {
+    location: string;
+    bio: {
       p1: string;
       p2: string;
     };
-    website?: {
+    website: {
       /**
        * Actual URL
        * @example "https://powell.place"
@@ -37,7 +37,7 @@ export interface IPersonalData {
        */
       pretty: string;
     };
-    profiles?: {
+    profiles: {
       /** Name of the social network */
       network: string;
       /**
@@ -51,29 +51,29 @@ export interface IPersonalData {
        */
       url: string;
     }[];
-    services?: {
-      iconSrc?: string;
-      iconSize?: number;
-      iconAlt?: string;
-      title?: string;
-      text?: string;
+    services: {
+      iconSrc: string;
+      iconSize: number;
+      iconAlt: string;
+      title: string;
+      text: string;
     }[];
-    education?: {
-      organization?: string;
-      duration?: string;
-      title?: string;
-      text?: string;
+    education: {
+      organization: string;
+      duration: string;
+      title: string;
+      text: string;
     }[];
-    experience?: {
-      organization?: string;
-      duration?: string;
-      title?: string;
-      text?: string;
+    experience: {
+      organization: string;
+      duration: string;
+      title: string;
+      text: string;
     }[];
-    certificates?: {
-      title?: string;
-      organization?: string;
-      link?: string;
+    certificates: {
+      title: string;
+      organization: string;
+      link: string;
     }[];
   };
 }

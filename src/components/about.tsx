@@ -14,9 +14,9 @@ export const About: FC<IPersonalData> = (props) => {
       </header>
 
       <section className={aboutStyles.about_text}>
-        <p>{props.about.bio!.p1}</p>
+        <p>{props.about.bio.p1}</p>
 
-        <p>{props.about.bio!.p2}</p>
+        <p>{props.about.bio.p2}</p>
       </section>
       <section className={aboutStyles.service}>
         <h3 className={[sharedstyles.h3, aboutStyles.service_title].join(' ')}>
@@ -33,11 +33,11 @@ export const About: FC<IPersonalData> = (props) => {
 function renderServices(
   services:
     | {
-        iconSrc?: string | undefined;
-        iconSize?: number | undefined;
-        iconAlt?: string | undefined;
-        title?: string | undefined;
-        text?: string | undefined;
+        iconSrc: string | undefined;
+        iconSize: number | undefined;
+        iconAlt: string | undefined;
+        title: string | undefined;
+        text: string | undefined;
       }[]
     | undefined
 ) {

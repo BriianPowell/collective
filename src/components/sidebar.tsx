@@ -9,7 +9,7 @@ import {
   mdiTwitter,
   mdiZodiacScorpio,
 } from '@mdi/js';
-import Icon from '@mdi/react';
+import { Icon } from '@mdi/react';
 import { FC, useState } from 'react';
 
 import sharedStyles from 'css/shared.module.scss';
@@ -20,7 +20,7 @@ import { IPersonalData } from 'types/index';
 export const Sidebar: FC<IPersonalData> = (props) => {
   const mailLink = `mailto:${props.about.email}`;
   const phoneLink = `tel:${props.about.phone}`;
-  // const birthday: string = props.about.birthday!.toLocaleDateString('en-US', {
+  // const birthday: string = props.about.birthday.toLocaleDateString('en-US', {
   //   month: 'long',
   //   day: 'numeric',
   // });
